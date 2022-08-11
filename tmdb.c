@@ -1,4 +1,4 @@
-#include "c-tmdb.h"
+#include "tmdb.h"
 #include "membuffer.h"
 
 #include <curl/curl.h>
