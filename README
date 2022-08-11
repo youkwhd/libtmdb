@@ -1,4 +1,28 @@
 c-tmdb
 ======
 
-c-tmdb is a C99 wrapper for the TMDB API.
+c-tmdb is  a simple C wrapper  /   library  for the The  Movie DB
+(TMDB) API. This library depends on libcurl, please be aware that
+it   is also  still   on development phase, any   contribution is
+welcome.
+
+You can  find simliar wrappers / libraries for other languages at
+https://www.themoviedb.org/documentation/api/wrappers-libraries
+
+1) API documentation
+--------------------
+
+The API of this library is quite well documented in the comments,
+you  can  refer to  the  file   c-tmdb.h,  or  straight  into the
+examples/ folder.
+
+In case  for the TMDB API  itself, you can find the documentation
+at https://developers.themoviedb.org/3
+
+2) Parsing JSON
+---------------
+
+Every tmdb_get* function will return JSON in char* type, in order
+to  use  the JSON  itself,  you   have  to  utilize  JSON parsing
+libraries  like  json-c, jsmn,  etc.  Or  take a look  here for a
+complete list https://www.json.org/json-en.html
