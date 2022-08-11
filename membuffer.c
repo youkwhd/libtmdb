@@ -22,7 +22,7 @@ void membuf_grow(membuffer *membuf, size_t new_size)
 void membuf_append(membuffer *membuf, const char *str, size_t str_size)
 {
     while (membuf->length + str_size > membuf->size)
-        membuf_grow(membuf, membuf->size * 2);
+        membuf_grow(membuf, membuf->length + (str_size * 2));
 
     memcpy(membuf->data + membuf->length, str, str_size);
     membuf->length += str_size;
