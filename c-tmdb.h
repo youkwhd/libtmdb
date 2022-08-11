@@ -11,7 +11,7 @@ typedef struct TMDB_config {
 bool tmdb_init(TMDBcfg cfg);
 void tmdb_cleanup();
 
-void tmdb_get_movie();
-void tmdb_get_trending();
+char *tmdb_get_movie();
+char *tmdb_get_trending();
 
-#endif
+#endif /* __C_TMDB_H */

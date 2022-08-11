@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -lcurl
 
-SRC = main.c c-tmdb.c
-OBJ = main.o c-tmdb.o
-DEPS = c-tmdb.h
+SRC = main.c curl_util.c membuffer.c c-tmdb.c
+OBJ = main.o curl_util.o membuffer.o c-tmdb.o
+DEPS = curl_util.h membuffer.h c-tmdb.h
 
 all: c-tmdb
 
