@@ -4,14 +4,19 @@
 #include <curl/curl.h>
 #include <stdbool.h>
 
-typedef struct TMDB_config {
+#include "membuffer.h"
+
+typedef struct TMDbConfig {
     const char *api_key;
-} TMDBcfg;
+} TMDbConfig;
 
-bool tmdb_init(TMDBcfg cfg);
+typedef membuffer TMDbBuffer;
+
+bool tmdb_init(TMDbConfig cfg);
 void tmdb_cleanup();
+void tmdb_buf_cleanup(TMDbBuffer *buf);
 
-char *tmdb_get_movie();
-char *tmdb_get_trending();
+TMDbBuffer *tmdb_get_movie();
+TMDbBuffer *tmdb_get_trending();
 
 #endif /* __C_TMDB_H */
