@@ -1,15 +1,22 @@
 #include "membuffer.h"
 
-void membuf_init(membuffer *buf, size_t size)
+membuffer *membuf_init(size_t size)
 {
-    buf->size = size;
-    buf->length = 0;
-    buf->data = malloc(size);
-
-    if (buf->data == NULL) {
-        fprintf(stderr, "membuf_init(): failed to allocate memory.\n");
+    membuffer *membuf = malloc(sizeof *membuf);
+    if (membuf == NULL) {
+        fprintf(stderr, "membuf_init(): membuf failed to allocate memory.\n");
         exit(EXIT_FAILURE);
     }
+
+    membuf->size = size;
+    membuf->length = 0;
+    membuf->data = malloc(size);
+    if (membuf->data == NULL) {
+        fprintf(stderr, "membuf_init(): membuf->data failed to allocate memory.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return membuf;
 }
 
 void membuf_reset(membuffer *membuf, size_t new_size)
@@ -29,6 +36,9 @@ void membuf_grow(membuffer *membuf, size_t new_size)
     }
 }
 
+/* since we're using memcpy,
+ * no need to pass membuf as double ptr?
+ */
 void membuf_append(membuffer *membuf, const char *str, size_t str_size)
 {
     while (membuf->length + str_size > membuf->size)
@@ -42,4 +52,5 @@ void membuf_append(membuffer *membuf, const char *str, size_t str_size)
 void membuf_cleanup(membuffer *membuf)
 {
     free(membuf->data);
+    free(membuf);
 }

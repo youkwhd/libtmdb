@@ -11,7 +11,7 @@ typedef struct membuffer {
     size_t length;
 } membuffer;
 
-void membuf_init(membuffer *buf, size_t size);
+membuffer *membuf_init(size_t size);
 void membuf_reset(membuffer *membuf, size_t new_size);
 void membuf_grow(membuffer *membuf, size_t new_size);
 void membuf_append(membuffer *membuf, const char *str, size_t str_size);
