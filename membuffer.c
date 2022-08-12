@@ -7,7 +7,7 @@ void membuf_init(membuffer *buf, size_t size)
     buf->data = malloc(size);
 
     if (buf->data == NULL) {
-        fprintf(stderr, "membuf_init(): malloc() failed to allocate memory.\n");
+        fprintf(stderr, "membuf_init(): failed to allocate memory.\n");
         exit(EXIT_FAILURE);
     }
 }
@@ -24,7 +24,7 @@ void membuf_grow(membuffer *membuf, size_t new_size)
     membuf->data = realloc(membuf->data, new_size);
 
     if (membuf->data == NULL) {
-        fprintf(stderr, "membuf_grow(): realloc() failed to reallocate memory.\n");
+        fprintf(stderr, "membuf_grow(): failed to reallocate memory.\n");
         exit(EXIT_FAILURE);
     }
 }

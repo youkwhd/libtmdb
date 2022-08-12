@@ -1,6 +1,7 @@
 #ifndef __MEMBUFFER_H
 #define __MEMBUFFER_H
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
