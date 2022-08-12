@@ -24,12 +24,9 @@ bool tmdb_init(TMDbConfig cfg)
         return false;
 
     uc = curl_url_set(url, CURLUPART_URL, "https://api.themoviedb.org", 0);
-    if (uc != CURLUE_OK)
-        return false;
-
+    if (uc != CURLUE_OK) return false;
     uc = curl_url_set(url, CURLUPART_QUERY, api_key, 0);
-    if (uc != CURLUE_OK)
-        return false;
+    if (uc != CURLUE_OK) return false;
 
     curl_easy_setopt(curl, CURLOPT_CURLU, url);
     /* curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L); */
