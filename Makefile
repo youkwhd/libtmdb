@@ -9,7 +9,9 @@ DEPS = $(wildcard *.h)
 # $(info $(OBJ))
 # $(info $(DEPS))
 
-all: $(OBJ)
+all: c-tmdb
+
+c-tmdb: $(OBJ)
 	$(CC) $(CFLAGS) $^ -o a.out
 
 %.o: %.c $(DEPS)
