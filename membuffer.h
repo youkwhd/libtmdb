@@ -5,11 +5,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define tmdb_buf_cleanup(membuf) membuf_cleanup(membuf)
+
 typedef struct membuffer {
     char *data;
     size_t size;
     size_t length;
 } membuffer;
+
+typedef membuffer TMDbBuffer;
 
 membuffer *membuf_init(size_t size);
 void membuf_reset(membuffer *membuf, size_t new_size);
