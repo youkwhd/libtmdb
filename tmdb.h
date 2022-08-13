@@ -7,6 +7,8 @@
 
 /* GET / POST / DELETE functions 
  */
+#include "credit.h"
+#include "find.h"
 #include "movie.h"
 #include "trending.h"
 
