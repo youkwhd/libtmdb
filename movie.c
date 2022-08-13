@@ -325,7 +325,8 @@ TMDbBuffer *tmdb_get_movie_release_dates(const char *movie_id)
 
     CURLcode res = curl_easy_perform(tmdb_curl_handler);
     if (res != CURLE_OK) return NULL;
-tmdb_url_cleanup(url);
+
+    tmdb_url_cleanup(url);
     return membuf;
 }
 
