@@ -10,6 +10,7 @@
 #include "credit.h"
 #include "find.h"
 #include "movie.h"
+#include "network.h"
 #include "trending.h"
 
 void tmdb_set_language(char *lang);
