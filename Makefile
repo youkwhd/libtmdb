@@ -1,5 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -lcurl
+CFLAGS = -Wall -Wextra -lcurl
+
+BIN = a.out
 
 SRC = $(wildcard *.c)
 OBJ = $(patsubst %.c,%.o, $(SRC))
@@ -9,13 +11,15 @@ DEPS = $(wildcard *.h)
 # $(info $(OBJ))
 # $(info $(DEPS))
 
-all: c-tmdb
+.PHONY: clean all
 
-c-tmdb: $(OBJ)
-	$(CC) $(CFLAGS) $^ -o a.out
+all: $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(CFLAGS) $^ -o $(BIN)
 
 %.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf a.out *.o
+	rm -rf $(BIN) $(OBJ)
