@@ -1,10 +1,7 @@
 #include "curl_util.h"
 #include "curl_handler.h"
 
-#include <curl/curl.h>
-#include <stddef.h>
 #include <string.h>
-#include <stdint.h>
 
 /* curl handler */
 CURL *tmdb_curl_handler;
