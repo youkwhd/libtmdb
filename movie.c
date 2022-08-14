@@ -74,7 +74,7 @@ TMDbBuffer *tmdb_get_movie_account_states(const char *movie_id, const char *sess
  *
  * https://developers.themoviedb.org/3/movies/get-movie-alternative-titles
  */
-TMDbBuffer *tmdb_get_movie_alternative_title(const char *movie_id, const char *country)
+TMDbBuffer *tmdb_get_movie_alternative_titles(const char *movie_id, const char *country)
 {
     char c_query[256] = "country=";
 
