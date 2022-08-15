@@ -12,6 +12,7 @@
 #include "genre.h"
 #include "movie.h"
 #include "network.h"
+#include "review.h"
 #include "trending.h"
 
 void tmdb_set_language(char *lang);
