@@ -17,8 +17,8 @@
 #include "keyword.h"
 #include "movie.h"
 #include "network.h"
-#include "review.h"
 #include "trending.h"
+#include "review.h"
 #include "watch_providers.h"
 
 void tmdb_set_language(char *lang);
