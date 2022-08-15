@@ -14,6 +14,7 @@
 #include "credit.h"
 #include "find.h"
 #include "genre.h"
+#include "keyword.h"
 #include "movie.h"
 #include "network.h"
 #include "review.h"
