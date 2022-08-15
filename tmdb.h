@@ -7,6 +7,7 @@
 
 /* GET / POST / DELETE functions 
  */
+#include "company.h"
 #include "credit.h"
 #include "find.h"
 #include "genre.h"
