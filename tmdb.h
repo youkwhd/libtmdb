@@ -9,6 +9,7 @@
  */
 #include "credit.h"
 #include "find.h"
+#include "genre.h"
 #include "movie.h"
 #include "network.h"
 #include "trending.h"
