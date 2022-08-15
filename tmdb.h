@@ -7,6 +7,7 @@
 
 /* GET / POST / DELETE functions 
  */
+#include "certification.h"
 #include "company.h"
 #include "credit.h"
 #include "find.h"
