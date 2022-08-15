@@ -19,6 +19,7 @@
 #include "network.h"
 #include "review.h"
 #include "trending.h"
+#include "watch_providers.h"
 
 void tmdb_set_language(char *lang);
 
