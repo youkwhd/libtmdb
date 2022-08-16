@@ -18,6 +18,7 @@
 #include "genre.h"
 #include "guest_session.h"
 #include "keyword.h"
+#include "list.h"
 #include "movie.h"
 #include "network.h"
 #include "trending.h"
