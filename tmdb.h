@@ -7,6 +7,7 @@
 
 /* GET / POST / DELETE functions 
  */
+#include "authentication.h"
 #include "certification.h"
 #include "changes.h"
 #include "collection.h"
