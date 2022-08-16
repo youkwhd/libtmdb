@@ -14,10 +14,12 @@ install: all
 	mkdir -p tmdb /usr/include
 	cp *.h  /usr/include/tmdb
 	cp libtmdb.so /usr/lib
+	cp libtmdb.so /lib
 
 uninstall:
 	rm -rf /usr/include/tmdb
-	rm -rf /usr/lib/libtmdb.so
+	rm -f /usr/lib/libtmdb.so
+	rm -f /lib/libtmdb.so
 
 %.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -fPIC -c $< -o $@
