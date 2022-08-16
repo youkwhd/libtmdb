@@ -11,6 +11,7 @@
 #include "changes.h"
 #include "collection.h"
 #include "company.h"
+#include "configuration.h"
 #include "credit.h"
 #include "find.h"
 #include "genre.h"
