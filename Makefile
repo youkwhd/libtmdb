@@ -1,25 +1,28 @@
 CC = gcc
-CFLAGS = -std=c99 -pedantic-errors -Wall -Wextra -lcurl
-
-BIN = a.out
+CFLAGS = -std=c99 -pedantic-errors -Wall -Wextra
 
 SRC = $(wildcard *.c)
 OBJ = $(patsubst %.c,%.o, $(SRC))
 DEPS = $(wildcard *.h)
 
-# $(info $(SRC))
-# $(info $(OBJ))
-# $(info $(DEPS))
+all: tmdb
 
-all: $(BIN)
+tmdb: $(OBJ)
+	$(CC) $(CFLAGS) -lcurl -shared $^ -o libtmdb.so
 
-$(BIN): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $(BIN)
+install: all
+	mkdir -p tmdb /usr/include
+	cp *.h  /usr/include/tmdb
+	cp libtmdb.so /usr/lib
+
+uninstall:
+	rm -rf /usr/include/tmdb
+	rm -rf /usr/lib/libtmdb.so
 
 %.o: %.c $(DEPS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
 clean:
-	rm -rf $(BIN) $(OBJ)
+	$(RM) libtmdb.so $(OBJ)
 
-.PHONY: clean all
+.PHONY: clean all tmdb install uninstall
