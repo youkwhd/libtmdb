@@ -22,6 +22,7 @@
 #include "network.h"
 #include "trending.h"
 #include "review.h"
+#include "tv_episode_group.h"
 #include "watch_providers.h"
 
 void tmdb_set_language(char *lang);
