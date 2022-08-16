@@ -11,8 +11,6 @@ DEPS = $(wildcard *.h)
 # $(info $(OBJ))
 # $(info $(DEPS))
 
-.PHONY: clean all
-
 all: $(BIN)
 
 $(BIN): $(OBJ)
@@ -23,3 +21,5 @@ $(BIN): $(OBJ)
 
 clean:
 	rm -rf $(BIN) $(OBJ)
+
+.PHONY: clean all
