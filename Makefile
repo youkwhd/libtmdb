@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -lcurl
+CFLAGS = -std=c99 -pedantic-errors -Wall -Wextra -lcurl
 
 BIN = a.out
 
