@@ -1,28 +1,31 @@
-c-tmdb
-======
+libtmdb
+=======
 
-c-tmdb is  a simple C wrapper  /   library  for the The  Movie DB
-(TMDb) API. This library depends on libcurl, please be aware that
-it   is also  still   on development phase, any   contribution is
-welcome.
+libtmdb is a simple C wrapper / library for the The Movie DB
+(TMDb) API, this library depends on libcurl for network calls.
+Please be aware that it is also still on early development stage,
+any contribution is welcome.
 
-You can  find simliar wrappers / libraries for other languages at
-https://www.themoviedb.org/documentation/api/wrappers-libraries
+You can find simliar wrappers / libraries for other languages at
+<https://www.themoviedb.org/documentation/api/wrappers-libraries>
 
-1) API documentation
---------------------
+1) Documentation
+----------------
 
 The API of this library is quite well documented in the comments,
-you  can  refer to  the  file   c-tmdb.h,  or  straight  into the
-examples/ folder.
+you can refer to the file tmdb.h, or straight into the examples/
+folder.
 
-In case  for the TMDb API  itself, you can find the documentation
-at https://developers.themoviedb.org/3
+In case for the TMDb API itself, you can find the documentation
+at <https://developers.themoviedb.org/3>
 
 2) Parsing JSON
 ---------------
 
-Every tmdb_get* function will return JSON in char* type, in order
-to  use  the JSON  itself,  you   have  to  utilize  JSON parsing
-libraries  like  json-c, jsmn,  etc.  Or  take a look  here for a
-complete list https://www.json.org/json-en.html
+Every function that does network calls, such as tmdb_get*,
+tmdb_post*, and tmdb_delete* returns TMDbBuffer (membuffer).
+
+In order to use the response, access the struct member named
+data. In order to parse JSON itself, you have to utilize JSON
+parsing libraries like json-c, jsmn, etc. Or take a look here for
+a complete list <https://www.json.org/json-en.html>
