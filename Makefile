@@ -5,9 +5,9 @@ SRC = $(wildcard *.c)
 OBJ = $(patsubst %.c,%.o, $(SRC))
 DEPS = $(wildcard *.h)
 
-all: tmdb
+all: libtmdb
 
-tmdb: $(OBJ)
+libtmdb: $(OBJ)
 	$(CC) $(CFLAGS) -lcurl -shared $^ -o libtmdb.so
 
 install: all
@@ -17,14 +17,14 @@ install: all
 	cp libtmdb.so /lib
 
 uninstall:
-	rm -rf /usr/include/tmdb
-	rm -f /usr/lib/libtmdb.so
-	rm -f /lib/libtmdb.so
+	$(RM) -r /usr/include/tmdb
+	$(RM) /usr/lib/libtmdb.so
+	$(RM) /lib/libtmdb.so
 
 %.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
 clean:
-	$(RM) libtmdb.so $(OBJ)
+	$(RM) $(OBJ) libtmdb.so
 
 .PHONY: clean all tmdb install uninstall
