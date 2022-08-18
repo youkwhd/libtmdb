@@ -26,7 +26,7 @@
 #include "trending.h"
 #include "people.h"
 #include "review.h"
-/* search */
+#include "search.h"
 #include "tv.h"
 /* tv season */
 /* tv episode */
