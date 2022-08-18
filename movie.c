@@ -58,6 +58,7 @@ TMDbBuffer *tmdb_get_movie_account_states(const char *movie_id, const char *sess
 
     char path[256] = "/3/movie/";
     strcat(path, movie_id);
+    strcat(path, "/account_states");
 
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
