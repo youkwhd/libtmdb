@@ -17,7 +17,6 @@ bool tmdb_init(const char *api_key)
         return false;
 
     strcat(tmdb_api_key_query, api_key);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_VERBOSE, 1L);
     curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEFUNCTION, curl_writefunction_callback);
 
     return true;
@@ -45,11 +44,11 @@ CURLU *tmdb_url_init()
 CURLUcode tmdb_url_query_append(CURLU *url, char *query, const char *query_value)
 {
     CURLUcode ret_code = CURLUE_OK;
-    if (query_value != NULL) {
-        strcat(query, query_value);
-        ret_code = curl_url_set(url, CURLUPART_QUERY, query, CURLU_APPENDQUERY);
-    }
+    if (query_value == NULL) 
+        return ret_code;
 
+    strcat(query, query_value);
+    ret_code = curl_url_set(url, CURLUPART_QUERY, query, CURLU_APPENDQUERY);
     return ret_code;
 }
 
