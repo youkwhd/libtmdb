@@ -24,7 +24,7 @@
 #include "movie.h"
 #include "network.h"
 #include "trending.h"
-/* people */
+#include "people.h"
 #include "review.h"
 /* search */
 #include "tv.h"
