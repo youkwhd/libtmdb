@@ -21,10 +21,8 @@ TMDbBuffer *tmdb_get_movie_similiar_movies(const char *movie_id, const char *pag
 TMDbBuffer *tmdb_get_movie_translations(const char *movie_id);
 TMDbBuffer *tmdb_get_movie_videos(const char *movie_id);
 TMDbBuffer *tmdb_get_movie_watch_providers(const char *movie_id);
-
-/* POST movies, no current implementation */
-/* DELETE movies, no current implementation */
-
+TMDbBuffer *tmdb_post_movie_rate(const char *movie_id, const char *guest_session_id, const char *session_id, const char *request_body);
+TMDbBuffer *tmdb_delete_movie_rating(const char *movie_id, const char *guest_session_id, const char *session_id);
 TMDbBuffer *tmdb_get_movie_latest();
 TMDbBuffer *tmdb_get_movie_now_playing(const char *page, const char *region);
 TMDbBuffer *tmdb_get_movie_popular(const char *page, const char *region);

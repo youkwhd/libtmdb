@@ -467,6 +467,78 @@ TMDbBuffer *tmdb_get_movie_watch_providers(const char *movie_id)
     return membuf;
 }
 
+TMDbBuffer *tmdb_post_movie_rate(const char *movie_id, const char *guest_session_id, const char *session_id, const char *request_body)
+{
+    char gsi_query[512] = "guest_session_id=";
+    char si_query[512] = "session_id=";
+
+    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+
+    struct curl_slist *header = NULL;
+    header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, header);
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POSTFIELDS, request_body);
+
+    CURLU *url = tmdb_url_init();
+    if (url == NULL) return NULL;
+    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, gsi_query, guest_session_id) != CURLUE_OK) return NULL;
+
+    char path[256] = "/3/movie/";
+    strcat(path, movie_id);
+    strcat(path, "/rating");
+
+    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
+    if (uc != CURLUE_OK) return NULL;
+
+    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    if (res != CURLE_OK) return NULL;
+
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, NULL);
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POST, 0);
+    curl_slist_free_all(header);
+
+    tmdb_url_cleanup(url);
+    return membuf;
+}
+
+TMDbBuffer *tmdb_delete_movie_rating(const char *movie_id, const char *guest_session_id, const char *session_id)
+{
+    char gsi_query[512] = "guest_session_id=";
+    char si_query[512] = "session_id=";
+
+    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+
+    struct curl_slist *header = NULL;
+    header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, header);
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_CUSTOMREQUEST, "DELETE");
+
+    CURLU *url = tmdb_url_init();
+    if (url == NULL) return NULL;
+    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, gsi_query, guest_session_id) != CURLUE_OK) return NULL;
+
+    char path[256] = "/3/movie/";
+    strcat(path, movie_id);
+    strcat(path, "/rating");
+
+    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
+    if (uc != CURLUE_OK) return NULL;
+
+    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    if (res != CURLE_OK) return NULL;
+
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, NULL);
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_CUSTOMREQUEST, NULL);
+    curl_slist_free_all(header);
+
+    tmdb_url_cleanup(url);
+    return membuf;
+}
+
 /* optional queries:
  *      - language
  *
