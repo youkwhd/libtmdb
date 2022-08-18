@@ -7,6 +7,7 @@
 
 /* GET / POST / DELETE functions 
  */
+#include "account.h"
 #include "authentication.h"
 #include "certification.h"
 #include "changes.h"
@@ -14,6 +15,7 @@
 #include "company.h"
 #include "configuration.h"
 #include "credit.h"
+/* discover */
 #include "find.h"
 #include "genre.h"
 #include "guest_session.h"
@@ -22,7 +24,12 @@
 #include "movie.h"
 #include "network.h"
 #include "trending.h"
+/* people */
 #include "review.h"
+/* search */
+/* tv */
+/* tv season */
+/* tv episode */
 #include "tv_episode_group.h"
 #include "watch_providers.h"
 
