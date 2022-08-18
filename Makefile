@@ -11,7 +11,7 @@ libtmdb: $(OBJ)
 	$(CC) $(CFLAGS) -lcurl -shared $^ -o libtmdb.so
 
 install: all
-	mkdir -p tmdb /usr/include
+	mkdir -p /usr/include/tmdb
 	cp *.h  /usr/include/tmdb
 	cp libtmdb.so /usr/lib
 	cp libtmdb.so /lib
