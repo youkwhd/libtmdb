@@ -28,7 +28,7 @@
 #include "review.h"
 #include "search.h"
 #include "tv.h"
-/* tv season */
+#include "tv_season.h"
 /* tv episode */
 #include "tv_episode_group.h"
 #include "watch_providers.h"
