@@ -27,4 +27,4 @@ uninstall:
 clean:
 	$(RM) $(OBJ) libtmdb.so
 
-.PHONY: clean all tmdb install uninstall
+.PHONY: clean all libtmdb install uninstall
