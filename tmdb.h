@@ -15,7 +15,7 @@
 #include "company.h"
 #include "configuration.h"
 #include "credit.h"
-/* discover */
+#include "discover.h"
 #include "find.h"
 #include "genre.h"
 #include "guest_session.h"
