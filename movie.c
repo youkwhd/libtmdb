@@ -82,7 +82,6 @@ TMDbBuffer *tmdb_get_movie_alternative_titles(const char *movie_id, const char *
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
 
-
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
     if (tmdb_url_query_append(url, c_query, country) != CURLUE_OK) return NULL;
