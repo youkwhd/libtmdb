@@ -21,15 +21,15 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-	struct json_object *jobj;
-	jobj = json_tokener_parse(movie->data);
-	printf("json pretty print:\n---\n%s\n---\n", json_object_to_json_string_ext(jobj, JSON_C_TO_STRING_SPACED | JSON_C_TO_STRING_PRETTY));
+    struct json_object *jobj;
+    jobj = json_tokener_parse(movie->data);
+    printf("json pretty print:\n---\n%s\n---\n", json_object_to_json_string_ext(jobj, JSON_C_TO_STRING_SPACED | JSON_C_TO_STRING_PRETTY));
 
-	struct json_object *original_title;
+    struct json_object *original_title;
     json_object_object_get_ex(jobj, "original_title", &original_title);
     printf("original_title: %s\n", json_object_get_string(original_title));
 
-	struct json_object *overview;
+    struct json_object *overview;
     json_object_object_get_ex(jobj, "overview", &overview);
     printf("overview: %s\n", json_object_get_string(overview));
 
