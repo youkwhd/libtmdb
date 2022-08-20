@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
 #include <tmdb/tmdb.h>
 
 #define YOUR_API_KEY ""
@@ -10,8 +11,10 @@
 int main(void)
 {
     bool ret = tmdb_init(YOUR_API_KEY);
-    if (!ret)
-        return 1;
+    if (!ret) {
+        fprintf(stderr, "failed to initialize curl.\n");
+        return EXIT_FAILURE;
+    }
 
     TMDbBuffer *movie = tmdb_get_movie_details("550", NULL);
     if (movie == NULL) {
