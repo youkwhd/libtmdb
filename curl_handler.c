@@ -22,6 +22,18 @@ bool tmdb_init(const char *api_key)
     return true;
 }
 
+bool tmdb_initc(const char *api_key, CURL *curl_handler)
+{
+    tmdb_curl_handler = curl_handler;
+    if (tmdb_curl_handler == NULL)
+        return false;
+
+    strcat(tmdb_api_key_query, api_key);
+    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEFUNCTION, curl_writefunction_callback);
+
+    return true;
+}
+
 void tmdb_cleanup()
 {
     curl_easy_cleanup(tmdb_curl_handler);

@@ -10,6 +10,7 @@ extern char tmdb_lang_query[64];
 extern char *tmdb_lang;
 
 bool tmdb_init(const char *api_key);
+bool tmdb_initc(const char *api_key, CURL *curl_handler);
 void tmdb_cleanup();
 
 CURLU *tmdb_url_init();
