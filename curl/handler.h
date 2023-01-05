@@ -4,10 +4,13 @@
 #include <curl/curl.h>
 #include <stdbool.h>
 
-extern CURL *tmdb_curl_handler;
+typedef struct TMDbConfig {
+    CURL *curl_handler;
+    char lang_query[64];
+    char *tmdb_lang;
+} TMDbConfig;
 
-extern char tmdb_lang_query[64];
-extern char *tmdb_lang;
+extern TMDbConfig __global_tmdb_config;
 
 bool tmdb_init(const char *api_key);
 bool tmdb_initc(const char *api_key, CURL *curl_handler);
