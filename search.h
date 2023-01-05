@@ -1,8 +1,8 @@
 #ifndef __C_TMDB_SEARCH_H
 #define __C_TMDB_SEARCH_H
 
-#include "curl_handler.h"
-#include "membuffer.h"
+#include "curl/handler.h"
+#include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_search_companies(const char *query, const char *page);
 TMDbBuffer *tmdb_get_search_collections(const char *query, const char *page);

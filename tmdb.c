@@ -2,5 +2,5 @@
 
 void tmdb_set_language(char *lang)
 {
-    tmdb_lang = lang;
+    __global_tmdb_config.lang = lang;
 }

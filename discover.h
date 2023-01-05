@@ -1,8 +1,8 @@
 #ifndef __C_TMDB_DISCOVER_H
 #define __C_TMDB_DISCOVER_H
 
-#include "curl_handler.h"
-#include "membuffer.h"
+#include "curl/handler.h"
+#include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_discover_movie(const char *region,
                                     const char *sort_by,

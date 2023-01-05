@@ -3,11 +3,11 @@
 TMDbBuffer *tmdb_get_list_details(const char *list_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/list/";
     strcat(path, list_id);
@@ -15,7 +15,7 @@ TMDbBuffer *tmdb_get_list_details(const char *list_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -27,7 +27,7 @@ TMDbBuffer *tmdb_get_list_item_status(const char *list_id, const char *movie_id)
     char mi_query[128] = "movie_id=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -40,7 +40,7 @@ TMDbBuffer *tmdb_get_list_item_status(const char *list_id, const char *movie_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -52,12 +52,12 @@ TMDbBuffer *tmdb_post_list_create(const char *session_id, const char *request_bo
     char si_query[256] = "session_id=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
     header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, header);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POSTFIELDS, request_body);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, header);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POSTFIELDS, request_body);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -68,11 +68,11 @@ TMDbBuffer *tmdb_post_list_create(const char *session_id, const char *request_bo
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, NULL);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POST, 0);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, NULL);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POST, 0);
     curl_slist_free_all(header);
 
     tmdb_url_cleanup(url);
@@ -84,12 +84,12 @@ TMDbBuffer *tmdb_post_list_add_movie(const char *list_id, const char *session_id
     char si_query[256] = "session_id=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
     header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, header);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POSTFIELDS, request_body);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, header);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POSTFIELDS, request_body);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -102,11 +102,11 @@ TMDbBuffer *tmdb_post_list_add_movie(const char *list_id, const char *session_id
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, NULL);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POST, 0);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, NULL);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POST, 0);
     curl_slist_free_all(header);
 
     tmdb_url_cleanup(url);
@@ -118,12 +118,12 @@ TMDbBuffer *tmdb_post_list_remove_movie(const char *list_id, const char *session
     char si_query[256] = "session_id=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
     header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, header);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POSTFIELDS, request_body);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, header);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POSTFIELDS, request_body);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -136,11 +136,11 @@ TMDbBuffer *tmdb_post_list_remove_movie(const char *list_id, const char *session
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, NULL);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POST, 0);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, NULL);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POST, 0);
     curl_slist_free_all(header);
 
     tmdb_url_cleanup(url);
@@ -153,12 +153,12 @@ TMDbBuffer *tmdb_post_list_clear(const char *list_id, const char *session_id, co
     char c_query[256] = "confirm=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
     header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, header);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POST, 1L);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, header);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POST, 1L);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -172,11 +172,11 @@ TMDbBuffer *tmdb_post_list_clear(const char *list_id, const char *session_id, co
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, NULL);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POST, 0);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, NULL);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POST, 0);
     curl_slist_free_all(header);
 
     tmdb_url_cleanup(url);
@@ -188,12 +188,12 @@ TMDbBuffer *tmdb_delete_list(const char *list_id, const char *session_id)
     char si_query[256] = "session_id=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
     header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, header);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_CUSTOMREQUEST, "DELETE");
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, header);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_CUSTOMREQUEST, "DELETE");
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -205,11 +205,11 @@ TMDbBuffer *tmdb_delete_list(const char *list_id, const char *session_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, NULL);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_CUSTOMREQUEST, NULL);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, NULL);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_CUSTOMREQUEST, NULL);
     curl_slist_free_all(header);
 
     tmdb_url_cleanup(url);

@@ -1,8 +1,8 @@
 #ifndef __C_TMDB_ACCOUNT_H
 #define __C_TMDB_ACCOUNT_H
 
-#include "curl_handler.h"
-#include "membuffer.h"
+#include "curl/handler.h"
+#include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_account_details(const char *session_id);
 TMDbBuffer *tmdb_get_account_lists(const char *account_id, const char *session_id, const char *page);

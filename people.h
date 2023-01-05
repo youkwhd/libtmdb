@@ -1,8 +1,8 @@
 #ifndef __C_TMDB_PEOPLE_H
 #define __C_TMDB_PEOPLE_H
 
-#include "curl_handler.h"
-#include "membuffer.h"
+#include "curl/handler.h"
+#include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_person_details(const char *person_id, const char *append_to_response);
 TMDbBuffer *tmdb_get_person_changes(const char *person_id, const char *start_date, const char *end_date, const char *page);

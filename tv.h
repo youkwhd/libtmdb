@@ -1,8 +1,8 @@
 #ifndef __C_TMDB_TV_H
 #define __C_TMDB_TV_H
 
-#include "curl_handler.h"
-#include "membuffer.h"
+#include "curl/handler.h"
+#include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_tv_details(const char *tv_id, const char *append_to_response);
 TMDbBuffer *tmdb_get_tv_account_states(const char *tv_id, const char *guest_session_id, const char *session_id);

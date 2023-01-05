@@ -73,11 +73,11 @@ TMDbBuffer *tmdb_get_discover_movie(const char *region,
     char wc_query[256] = "without_companies=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, r_query, region) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, sb_query, sort_by) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, cc_query, certification_country) != CURLUE_OK) return NULL;
@@ -119,7 +119,7 @@ TMDbBuffer *tmdb_get_discover_movie(const char *region,
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -183,11 +183,11 @@ TMDbBuffer *tmdb_get_discover_tv(const char *sort_by,
      char wcs_query[256] = "without_companies=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, sb_query, sort_by) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, adg_query, air_date_gte) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, adl_query, air_date_lte) != CURLUE_OK) return NULL;
@@ -221,7 +221,7 @@ TMDbBuffer *tmdb_get_discover_tv(const char *sort_by,
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);

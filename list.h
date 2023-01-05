@@ -1,8 +1,8 @@
 #ifndef __C_TMDB_LIST_H
 #define __C_TMDB_LIST_H
 
-#include "curl_handler.h"
-#include "membuffer.h"
+#include "curl/handler.h"
+#include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_list_details(const char *list_id);
 TMDbBuffer *tmdb_get_list_item_status(const char *list_id, const char *movie_id);

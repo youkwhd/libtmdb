@@ -5,11 +5,11 @@ TMDbBuffer *tmdb_get_person_details(const char *person_id, const char *append_to
     char atp_query[512] = "append_to_response=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, atp_query, append_to_response) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/person/";
@@ -18,7 +18,7 @@ TMDbBuffer *tmdb_get_person_details(const char *person_id, const char *append_to
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -32,7 +32,7 @@ TMDbBuffer *tmdb_get_person_changes(const char *person_id, const char *start_dat
     char p_query[256] = "page=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -47,7 +47,7 @@ TMDbBuffer *tmdb_get_person_changes(const char *person_id, const char *start_dat
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -57,11 +57,11 @@ TMDbBuffer *tmdb_get_person_changes(const char *person_id, const char *start_dat
 TMDbBuffer *tmdb_get_person_movie_credits(const char *person_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/person/";
     strcat(path, person_id);
@@ -70,7 +70,7 @@ TMDbBuffer *tmdb_get_person_movie_credits(const char *person_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -80,11 +80,11 @@ TMDbBuffer *tmdb_get_person_movie_credits(const char *person_id)
 TMDbBuffer *tmdb_get_person_tv_credits(const char *person_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/person/";
     strcat(path, person_id);
@@ -93,7 +93,7 @@ TMDbBuffer *tmdb_get_person_tv_credits(const char *person_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -103,11 +103,11 @@ TMDbBuffer *tmdb_get_person_tv_credits(const char *person_id)
 TMDbBuffer *tmdb_get_person_combined_credits(const char *person_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/person/";
     strcat(path, person_id);
@@ -116,7 +116,7 @@ TMDbBuffer *tmdb_get_person_combined_credits(const char *person_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -126,11 +126,11 @@ TMDbBuffer *tmdb_get_person_combined_credits(const char *person_id)
 TMDbBuffer *tmdb_get_person_external_ids(const char *person_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/person/";
     strcat(path, person_id);
@@ -139,7 +139,7 @@ TMDbBuffer *tmdb_get_person_external_ids(const char *person_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -149,7 +149,7 @@ TMDbBuffer *tmdb_get_person_external_ids(const char *person_id)
 TMDbBuffer *tmdb_get_person_images(const char *person_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -161,7 +161,7 @@ TMDbBuffer *tmdb_get_person_images(const char *person_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -173,11 +173,11 @@ TMDbBuffer *tmdb_get_person_tagged_images(const char *person_id, const char *pag
     char p_query[256] = "page=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/person/";
@@ -187,7 +187,7 @@ TMDbBuffer *tmdb_get_person_tagged_images(const char *person_id, const char *pag
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -197,11 +197,11 @@ TMDbBuffer *tmdb_get_person_tagged_images(const char *person_id, const char *pag
 TMDbBuffer *tmdb_get_person_translations(const char *person_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/person/";
     strcat(path, person_id);
@@ -210,7 +210,7 @@ TMDbBuffer *tmdb_get_person_translations(const char *person_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -220,18 +220,18 @@ TMDbBuffer *tmdb_get_person_translations(const char *person_id)
 TMDbBuffer *tmdb_get_person_latest()
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/person/latest";
 
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -243,11 +243,11 @@ TMDbBuffer *tmdb_get_person_popular(const char *page)
     char p_query[256] = "page=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/person/popular";
@@ -255,7 +255,7 @@ TMDbBuffer *tmdb_get_person_popular(const char *page)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);

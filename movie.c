@@ -13,11 +13,11 @@ TMDbBuffer *tmdb_get_movie_details(const char *movie_id, const char *append_to_r
     char atp_query[512] = "append_to_response=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, atp_query, append_to_response) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/movie/";
@@ -26,7 +26,7 @@ TMDbBuffer *tmdb_get_movie_details(const char *movie_id, const char *append_to_r
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -48,11 +48,11 @@ TMDbBuffer *tmdb_get_movie_account_states(const char *movie_id, const char *sess
     char si_query[512] = "session_id=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, gsi_query, guest_session_id) != CURLUE_OK) return NULL;
 
@@ -63,7 +63,7 @@ TMDbBuffer *tmdb_get_movie_account_states(const char *movie_id, const char *sess
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -80,7 +80,7 @@ TMDbBuffer *tmdb_get_movie_alternative_titles(const char *movie_id, const char *
     char c_query[256] = "country=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -93,7 +93,7 @@ TMDbBuffer *tmdb_get_movie_alternative_titles(const char *movie_id, const char *
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -114,7 +114,7 @@ TMDbBuffer *tmdb_get_movie_changes(const char *movie_id, const char *start_date,
     char p_query[256] = "page=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -129,7 +129,7 @@ TMDbBuffer *tmdb_get_movie_changes(const char *movie_id, const char *start_date,
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -144,11 +144,11 @@ TMDbBuffer *tmdb_get_movie_changes(const char *movie_id, const char *start_date,
 TMDbBuffer *tmdb_get_movie_credits(const char *movie_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/movie/";
     strcat(path, movie_id);
@@ -157,7 +157,7 @@ TMDbBuffer *tmdb_get_movie_credits(const char *movie_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -169,7 +169,7 @@ TMDbBuffer *tmdb_get_movie_credits(const char *movie_id)
 TMDbBuffer *tmdb_get_movie_external_ids(const char *movie_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -181,7 +181,7 @@ TMDbBuffer *tmdb_get_movie_external_ids(const char *movie_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -199,11 +199,11 @@ TMDbBuffer *tmdb_get_movie_images(const char *movie_id, const char *include_imag
     char iil_query[256] = "include_image_language=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, tmdb_lang_query, tmdb_lang) != CURLUE_OK) return NULL;
+    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, iil_query, include_image_language) != CURLUE_OK) return NULL;
 
     char path[256] = "/3/movie/";
@@ -213,7 +213,7 @@ TMDbBuffer *tmdb_get_movie_images(const char *movie_id, const char *include_imag
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -225,7 +225,7 @@ TMDbBuffer *tmdb_get_movie_images(const char *movie_id, const char *include_imag
 TMDbBuffer *tmdb_get_movie_keywords(const char *movie_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -237,7 +237,7 @@ TMDbBuffer *tmdb_get_movie_keywords(const char *movie_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -255,7 +255,7 @@ TMDbBuffer *tmdb_get_movie_lists(const char *movie_id, const char *page)
     char p_query[64] = "page=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -268,7 +268,7 @@ TMDbBuffer *tmdb_get_movie_lists(const char *movie_id, const char *page)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -286,7 +286,7 @@ TMDbBuffer *tmdb_get_movie_recommendations(const char *movie_id, const char *pag
     char p_query[64] = "page=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -299,7 +299,7 @@ TMDbBuffer *tmdb_get_movie_recommendations(const char *movie_id, const char *pag
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -311,7 +311,7 @@ TMDbBuffer *tmdb_get_movie_recommendations(const char *movie_id, const char *pag
 TMDbBuffer *tmdb_get_movie_release_dates(const char *movie_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -323,7 +323,7 @@ TMDbBuffer *tmdb_get_movie_release_dates(const char *movie_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -341,7 +341,7 @@ TMDbBuffer *tmdb_get_movie_reviews(const char *movie_id, const char *page)
     char p_query[256] = "page=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -354,7 +354,7 @@ TMDbBuffer *tmdb_get_movie_reviews(const char *movie_id, const char *page)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -372,7 +372,7 @@ TMDbBuffer *tmdb_get_movie_similiar_movies(const char *movie_id, const char *pag
     char p_query[256] = "page=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -385,7 +385,7 @@ TMDbBuffer *tmdb_get_movie_similiar_movies(const char *movie_id, const char *pag
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -397,7 +397,7 @@ TMDbBuffer *tmdb_get_movie_similiar_movies(const char *movie_id, const char *pag
 TMDbBuffer *tmdb_get_movie_translations(const char *movie_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -409,7 +409,7 @@ TMDbBuffer *tmdb_get_movie_translations(const char *movie_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -424,7 +424,7 @@ TMDbBuffer *tmdb_get_movie_translations(const char *movie_id)
 TMDbBuffer *tmdb_get_movie_videos(const char *movie_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -436,7 +436,7 @@ TMDbBuffer *tmdb_get_movie_videos(const char *movie_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -448,7 +448,7 @@ TMDbBuffer *tmdb_get_movie_videos(const char *movie_id)
 TMDbBuffer *tmdb_get_movie_watch_providers(const char *movie_id)
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -460,7 +460,7 @@ TMDbBuffer *tmdb_get_movie_watch_providers(const char *movie_id)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -473,12 +473,12 @@ TMDbBuffer *tmdb_post_movie_rate(const char *movie_id, const char *guest_session
     char si_query[512] = "session_id=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
     header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, header);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POSTFIELDS, request_body);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, header);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POSTFIELDS, request_body);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -492,11 +492,11 @@ TMDbBuffer *tmdb_post_movie_rate(const char *movie_id, const char *guest_session
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, NULL);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_POST, 0);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, NULL);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POST, 0);
     curl_slist_free_all(header);
 
     tmdb_url_cleanup(url);
@@ -509,12 +509,12 @@ TMDbBuffer *tmdb_delete_movie_rating(const char *movie_id, const char *guest_ses
     char si_query[512] = "session_id=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
     header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, header);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_CUSTOMREQUEST, "DELETE");
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, header);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_CUSTOMREQUEST, "DELETE");
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -528,11 +528,11 @@ TMDbBuffer *tmdb_delete_movie_rating(const char *movie_id, const char *guest_ses
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_HTTPHEADER, NULL);
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_CUSTOMREQUEST, NULL);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, NULL);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_CUSTOMREQUEST, NULL);
     curl_slist_free_all(header);
 
     tmdb_url_cleanup(url);
@@ -547,7 +547,7 @@ TMDbBuffer *tmdb_delete_movie_rating(const char *movie_id, const char *guest_ses
 TMDbBuffer *tmdb_get_movie_latest()
 {
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -558,7 +558,7 @@ TMDbBuffer *tmdb_get_movie_latest()
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -578,7 +578,7 @@ TMDbBuffer *tmdb_get_movie_now_playing(const char *page, const char *region)
     char r_query[256] = "region=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -591,7 +591,7 @@ TMDbBuffer *tmdb_get_movie_now_playing(const char *page, const char *region)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -611,7 +611,7 @@ TMDbBuffer *tmdb_get_movie_popular(const char *page, const char *region)
     char r_query[256] = "region=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -624,7 +624,7 @@ TMDbBuffer *tmdb_get_movie_popular(const char *page, const char *region)
     if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
     if (tmdb_url_query_append(url, r_query, region) != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -644,7 +644,7 @@ TMDbBuffer *tmdb_get_movie_top_rated(const char *page, const char *region)
     char r_query[256] = "region=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -657,7 +657,7 @@ TMDbBuffer *tmdb_get_movie_top_rated(const char *page, const char *region)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);
@@ -677,7 +677,7 @@ TMDbBuffer *tmdb_get_movie_upcoming(const char *page, const char *region)
     char r_query[256] = "region=";
 
     TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(tmdb_curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) return NULL;
@@ -690,7 +690,7 @@ TMDbBuffer *tmdb_get_movie_upcoming(const char *page, const char *region)
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) return NULL;
 
-    CURLcode res = curl_easy_perform(tmdb_curl_handler);
+    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) return NULL;
 
     tmdb_url_cleanup(url);

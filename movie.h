@@ -1,8 +1,8 @@
 #ifndef __C_TMDB_MOVIE_H
 #define __C_TMDB_MOVIE_H
 
-#include "curl_handler.h"
-#include "membuffer.h"
+#include "curl/handler.h"
+#include "membuffer/membuffer.h"
 
 /* GET movies */
 TMDbBuffer *tmdb_get_movie_details(const char *movie_id, const char *append_to_response);

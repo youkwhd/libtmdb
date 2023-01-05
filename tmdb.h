@@ -3,7 +3,7 @@
 
 /* curl core
  */
-#include "curl_handler.h"
+#include "curl/handler.h"
 
 /* GET / POST / DELETE functions 
  */
