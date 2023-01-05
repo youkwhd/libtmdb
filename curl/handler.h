@@ -1,5 +1,5 @@
-#ifndef __C_TMDB_HANDLER_H
-#define __C_TMDB_HANDLER_H
+#ifndef __CURL_HANDLER_H
+#define __CURL_HANDLER_H
 
 #include <curl/curl.h>
 #include <stdbool.h>
@@ -17,4 +17,4 @@ CURLU *tmdb_url_init();
 CURLUcode tmdb_url_query_append(CURLU *url, char *query, const char *query_value);
 void tmdb_url_cleanup(CURLU *url);
 
-#endif /* __C_TMDB_H */
+#endif /* __CURL_HANDLER_H */

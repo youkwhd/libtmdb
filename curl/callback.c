@@ -1,4 +1,4 @@
-#include "curl_util.h"
+#include "callback.h"
 
 size_t curl_writefunction_callback(char *data, size_t size, size_t nmemb, membuffer *membuf)
 {
