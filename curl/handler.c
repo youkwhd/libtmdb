@@ -7,7 +7,7 @@
 TMDbConfig __global_tmdb_config = {
     .curl_handler = NULL,
     .lang_query = "language=",
-    .tmdb_lang = "en-US",
+    .lang = "en-US",
 };
 
 char tmdb_config_api_key_query[256] = "api_key=";

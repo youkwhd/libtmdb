@@ -6,8 +6,8 @@
 
 typedef struct TMDbConfig {
     CURL *curl_handler;
+    char *lang;
     char lang_query[64];
-    char *tmdb_lang;
 } TMDbConfig;
 
 extern TMDbConfig __global_tmdb_config;
