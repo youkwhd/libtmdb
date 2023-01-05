@@ -2,6 +2,7 @@
 #define __C_TMDB_MOVIE_H
 
 #include "curl/handler.h"
+#include "curl/url.h"
 #include "membuffer/membuffer.h"
 
 /* GET movies */

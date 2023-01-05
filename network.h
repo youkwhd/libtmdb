@@ -2,6 +2,7 @@
 #define __C_TMDB_NETWORK_H
 
 #include "curl/handler.h"
+#include "curl/url.h"
 #include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_network_details(const char *network_id);

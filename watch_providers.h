@@ -2,6 +2,7 @@
 #define __C_TMDB_WATCH_PROVIDER_H
 
 #include "curl/handler.h"
+#include "curl/url.h"
 #include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_watch_providers_regions();

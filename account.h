@@ -2,6 +2,7 @@
 #define __C_TMDB_ACCOUNT_H
 
 #include "curl/handler.h"
+#include "curl/url.h"
 #include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_account_details(const char *session_id);

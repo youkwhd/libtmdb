@@ -2,6 +2,7 @@
 #define __C_TMDB_AUTHENTICATION_H
 
 #include "curl/handler.h"
+#include "curl/url.h"
 #include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_authentication_guest_session_new();

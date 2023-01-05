@@ -2,6 +2,7 @@
 #define __C_TMDB_PEOPLE_H
 
 #include "curl/handler.h"
+#include "curl/url.h"
 #include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_person_details(const char *person_id, const char *append_to_response);

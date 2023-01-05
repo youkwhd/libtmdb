@@ -2,6 +2,7 @@
 #define __C_TMDB_LIST_H
 
 #include "curl/handler.h"
+#include "curl/url.h"
 #include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_list_details(const char *list_id);

@@ -2,6 +2,7 @@
 #define __C_TMDB_TV_SEASON_H
 
 #include "curl/handler.h"
+#include "curl/url.h"
 #include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_tv_season_details(const char *tv_id, const char *season_number, const char *append_to_response);

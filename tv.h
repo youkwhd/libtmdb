@@ -2,6 +2,7 @@
 #define __C_TMDB_TV_H
 
 #include "curl/handler.h"
+#include "curl/url.h"
 #include "membuffer/membuffer.h"
 
 TMDbBuffer *tmdb_get_tv_details(const char *tv_id, const char *append_to_response);
