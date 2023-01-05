@@ -10,9 +10,14 @@ all: libtmdb
 libtmdb: $(OBJ)
 	$(CC) $(CFLAGS) -lcurl -shared $^ -o libtmdb.so
 
+# TODO: automate nest folder
 install: libtmdb
 	mkdir -p /usr/include/tmdb
 	cp *.h  /usr/include/tmdb
+	mkdir -p /usr/include/tmdb/curl
+	cp curl/*.h /usr/include/tmdb/curl
+	mkdir -p /usr/include/tmdb/membuffer
+	cp membuffer/*.h /usr/include/tmdb/membuffer
 	cp libtmdb.so /usr/lib
 	cp libtmdb.so /lib
 
