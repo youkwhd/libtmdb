@@ -1,0 +1,5 @@
+examples
+========
+
+You may tweak `build.sh` with your needs as each examples
+requires external libraries
