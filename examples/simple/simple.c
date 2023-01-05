@@ -10,15 +10,14 @@
 
 int main(void)
 {
-    bool ret = tmdb_init(YOUR_API_KEY);
-    if (!ret) {
+    if (!tmdb_init(YOUR_API_KEY)) {
         fprintf(stderr, "failed to initialize curl.\n");
         return EXIT_FAILURE;
     }
 
     TMDbBuffer *movie = tmdb_get_movie_details("550", NULL);
     if (movie == NULL) {
-        fprintf(stderr, "failed.\n");
+        fprintf(stderr, "failed to get movie details.\n");
         tmdb_cleanup();
         return EXIT_FAILURE;
     }

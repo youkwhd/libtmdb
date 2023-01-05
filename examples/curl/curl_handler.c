@@ -5,6 +5,7 @@
  * tmdb_cleanup will release your own curl_handler,
  * this can lead into vary problems.
  */
+
 #include <stdlib.h>
 #include <stdbool.h>
 
