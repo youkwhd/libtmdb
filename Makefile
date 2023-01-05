@@ -1,11 +1,16 @@
 CC = gcc
 CFLAGS = -std=c99 -pedantic-errors -Wall -Wextra
 
-SRC = $(wildcard *.c)
+SRC = $(wildcard *.c curl/*.c membuffer/*.c)
 OBJ = $(patsubst %.c,%.o, $(SRC))
-DEPS = $(wildcard *.h)
+DEPS = $(wildcard *.h curl/*.c membuffer/*.c)
 
 all: libtmdb
+
+debug:
+	@echo $(SRC)
+	@echo $(OBJ)
+	@echo $(DEPS)
 
 libtmdb: $(OBJ)
 	$(CC) $(CFLAGS) -lcurl -shared $^ -o libtmdb.so
