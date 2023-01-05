@@ -10,7 +10,7 @@ CURLU *tmdb_url_init()
     CURLUcode uc;
     uc = curl_url_set(url, CURLUPART_URL, "https://api.themoviedb.org", 0);
     if (uc != CURLUE_OK) return NULL;
-    uc = curl_url_set(url, CURLUPART_QUERY, tmdb_config_api_key_query, 0);
+    uc = curl_url_set(url, CURLUPART_QUERY, __global_tmdb_config.api_key_query, 0);
     if (uc != CURLUE_OK) return NULL;
 
     return url;

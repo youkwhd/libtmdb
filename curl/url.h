@@ -1,6 +1,7 @@
 #ifndef __CURL_URL_H
 #define __CURL_URL_H
 
+#include "handler.h"
 #include <curl/curl.h>
 
 CURLU *tmdb_url_init();

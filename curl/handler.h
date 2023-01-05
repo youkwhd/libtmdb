@@ -6,6 +6,8 @@
 
 typedef struct TMDbConfig {
     CURL *curl_handler;
+    char *api_key;
+    char api_key_query[256];
     char *lang;
     char lang_query[64];
 } TMDbConfig;
