@@ -36,9 +36,6 @@ void membuf_grow(membuffer *membuf, size_t new_size)
     }
 }
 
-/* since we're using memcpy,
- * no need to pass membuf as double ptr?
- */
 void membuf_append(membuffer *membuf, const char *str, size_t str_size)
 {
     while (membuf->length + str_size > membuf->size)
