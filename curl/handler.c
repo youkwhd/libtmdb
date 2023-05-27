@@ -11,9 +11,9 @@ TMDbConfig __global_tmdb_config = {
     .lang = "en-US",
 };
 
-bool tmdb_init(const char *api_key)
+bool tmdb_initc(const char *api_key, CURL *curl_handler)
 {
-    __global_tmdb_config.curl_handler = curl_easy_init();
+    __global_tmdb_config.curl_handler = curl_handler;
     if (__global_tmdb_config.curl_handler == NULL)
         return false;
 
@@ -24,16 +24,9 @@ bool tmdb_init(const char *api_key)
     return true;
 }
 
-bool tmdb_initc(const char *api_key, CURL *curl_handler)
+bool tmdb_init(const char *api_key)
 {
-    __global_tmdb_config.curl_handler = curl_handler;
-    if (__global_tmdb_config.curl_handler == NULL)
-        return false;
-
-    strcat(__global_tmdb_config.api_key_query, api_key);
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEFUNCTION, curl_writefunction_callback);
-
-    return true;
+    return tmdb_initc(api_key, curl_easy_init());
 }
 
 void tmdb_cleanup()
