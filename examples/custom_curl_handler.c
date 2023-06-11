@@ -22,7 +22,12 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    TMDbBuffer *movie = tmdb_get_movie_details("550", NULL);
+    TMDb_Buffer *movie = tmdb_get_movie_details(
+            tmdb_query_init((TMDb_Query_Parameter){
+                {"movie_id", "666"}
+            }, 1)
+    );
+
     if (movie == NULL) {
         fprintf(stderr, "failed.\n");
         curl_easy_cleanup(curl_handler);
