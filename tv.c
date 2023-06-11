@@ -219,74 +219,26 @@ TMDb_Buffer *tmdb_get_tv_watch_providers(TMDb_Query *query)
 
 TMDb_Buffer *tmdb_post_tv_rate(TMDb_Query *query, const char *request_body)
 {
-    char gsi_query[512] = "guest_session_id=";
-    char si_query[512] = "session_id=";
+    if (!tmdb_query_has(query, "series_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    struct curl_slist *header = NULL;
-    header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, header);
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POSTFIELDS, request_body);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, gsi_query, guest_session_id) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/tv/";
-    strcat(path, tv_id);
-    strcat(path, "/rating");
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, NULL);
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_POST, 0);
-    curl_slist_free_all(header);
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "/3/tv/%s/rating", tmdb_query_get(query, "series_id"));
+    return tmdb_request_create_post(query, (const char *[]){"series_id"}, 1, path, request_body);
 }
 
 TMDb_Buffer *tmdb_delete_tv_rating(TMDb_Query *query)
 {
-    char gsi_query[512] = "guest_session_id=";
-    char si_query[512] = "session_id=";
+    if (!tmdb_query_has(query, "series_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    struct curl_slist *header = NULL;
-    header = curl_slist_append(header, "Content-Type: application/json;charset=utf-8");
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, header);
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_CUSTOMREQUEST, "DELETE");
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, gsi_query, guest_session_id) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/tv/";
-    strcat(path, tv_id);
-    strcat(path, "/rating");
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_HTTPHEADER, NULL);
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_CUSTOMREQUEST, NULL);
-    curl_slist_free_all(header);
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "/3/tv/%s/rating", tmdb_query_get(query, "series_id"));
+    return tmdb_request_create_delete(query, (const char *[]){"series_id"}, 1, path);
 }
 
 TMDb_Buffer *tmdb_get_tv_latest()

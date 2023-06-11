@@ -8,10 +8,10 @@
 
 TMDb_Buffer *tmdb_get_list_details(TMDb_Query *query);
 TMDb_Buffer *tmdb_get_list_item_status(TMDb_Query *query);
-TMDb_Buffer *tmdb_post_list_create(TMDb_Query *query);
-TMDb_Buffer *tmdb_post_list_add_movie(TMDb_Query *query);
-TMDb_Buffer *tmdb_post_list_remove_movie(TMDb_Query *query);
-TMDb_Buffer *tmdb_post_list_clear(TMDb_Query *query);
+TMDb_Buffer *tmdb_post_list_create(TMDb_Query *query, const char *request_body);
+TMDb_Buffer *tmdb_post_list_add_movie(TMDb_Query *query, const char *request_body);
+TMDb_Buffer *tmdb_post_list_remove_movie(TMDb_Query *query, const char *request_body);
+TMDb_Buffer *tmdb_post_list_clear(TMDb_Query *query, const char *request_body);
 TMDb_Buffer *tmdb_delete_list(TMDb_Query *query);
 
 #endif

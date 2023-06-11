@@ -24,7 +24,7 @@ TMDb_Buffer *tmdb_get_tv_similiar(TMDb_Query *query);
 TMDb_Buffer *tmdb_get_tv_translations(TMDb_Query *query);
 TMDb_Buffer *tmdb_get_tv_videos(TMDb_Query *query);
 TMDb_Buffer *tmdb_get_tv_watch_providers(TMDb_Query *query);
-TMDb_Buffer *tmdb_post_tv_rate(TMDb_Query *query);
+TMDb_Buffer *tmdb_post_tv_rate(TMDb_Query *query, const char *request_body);
 TMDb_Buffer *tmdb_delete_tv_rating(TMDb_Query *query);
 TMDb_Buffer *tmdb_get_tv_latest();
 TMDb_Buffer *tmdb_get_tv_airing_today(TMDb_Query *query);
