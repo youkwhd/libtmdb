@@ -4,7 +4,7 @@
 
 char __tmdb_query_buf[TMDB_QUERY_MAX];
 
-TMDb_Query *tmdb_query_init(TMDb_Query_Values values, size_t n)
+TMDb_Query *tmdb_query_init(TMDb_Query_Parameter values, size_t n)
 {
     TMDb_Query *query = sm_new(TMDB_QUERY_MAX);
 

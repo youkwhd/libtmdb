@@ -16,9 +16,9 @@
 #define tmdb_query_cleanup(query) sm_delete(query)
 
 typedef StrMap TMDb_Query;
-typedef char * TMDb_Query_Values[TMDB_QUERY_MAX][2];
+typedef char * TMDb_Query_Parameter[TMDB_QUERY_MAX][2];
 
-TMDb_Query *tmdb_query_init(TMDb_Query_Values values, size_t n);
+TMDb_Query *tmdb_query_init(TMDb_Query_Parameter values, size_t n);
 char *tmdb_query_get(TMDb_Query *query, const char *key);
 
 #endif /* __QUERY_TMDB_H */
