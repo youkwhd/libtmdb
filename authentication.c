@@ -1,54 +1,18 @@
 #include "authentication.h"
 
-/* https://developers.themoviedb.org/3/authentication/create-guest-session
- */
-TMDbBuffer *tmdb_get_authentication_guest_session_new()
+TMDb_Buffer *tmdb_get_authentication_guest_session_new()
 {
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-
-    char path[256] = "/3/authentication/guest_session/new";
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    return tmdb_request_create_get(tmdb_query_init(NULL, 0), NULL, 0, "/3/authentication/guest_session/new");
 }
 
-/* https://developers.themoviedb.org/3/authentication/create-request-token 
- */
-TMDbBuffer *tmdb_get_authentication_token_new()
+TMDb_Buffer *tmdb_get_authentication_token_new()
 {
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-
-    char path[256] = "/3/authentication/token/new";
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    return tmdb_request_create_get(tmdb_query_init(NULL, 0), NULL, 0, "/3/authentication/token/new");
 }
 
-/* https://developers.themoviedb.org/3/authentication/create-session 
- */
-TMDbBuffer *tmdb_post_authentication_session_new(const char *request_body)
+TMDb_Buffer *tmdb_post_authentication_session_new(const char *request_body)
 {
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
@@ -75,11 +39,9 @@ TMDbBuffer *tmdb_post_authentication_session_new(const char *request_body)
     return membuf;
 }
 
-/* https://developers.themoviedb.org/3/authentication/create-session-from-v4-access-token
- */
-TMDbBuffer *tmdb_post_session_convert_v4(const char *request_body)
+TMDb_Buffer *tmdb_post_session_convert_v4(const char *request_body)
 {
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
@@ -106,11 +68,9 @@ TMDbBuffer *tmdb_post_session_convert_v4(const char *request_body)
     return membuf;
 }
 
-/* https://developers.themoviedb.org/3/authentication/delete-session
- */
-TMDbBuffer *tmdb_delete_authentication_session(const char *request_body)
+TMDb_Buffer *tmdb_delete_authentication_session(const char *request_body)
 {
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;

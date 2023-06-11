@@ -4,9 +4,10 @@
 #include "curl/handler.h"
 #include "curl/url.h"
 #include "membuffer/membuffer.h"
+#include "request/request.h"
 
-TMDbBuffer *tmdb_get_collection_details(const char *collection_id);
-TMDbBuffer *tmdb_get_collection_images(const char *collection_id);
-TMDbBuffer *tmdb_get_collection_translations(const char *collection_id);
+TMDb_Buffer *tmdb_get_collection_details(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_collection_images(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_collection_translations(TMDb_Query *query);
 
 #endif

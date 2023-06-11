@@ -13,7 +13,7 @@ typedef struct membuffer {
     size_t length;
 } membuffer;
 
-typedef membuffer TMDbBuffer;
+typedef membuffer TMDb_Buffer;
 
 membuffer *membuf_init(size_t size);
 void membuf_reset(membuffer *membuf, size_t new_size);

@@ -6,6 +6,9 @@
 #include "curl/handler.h"
 #include "curl/url.h"
 
+#include "request/request.h"
+#include "query/query.h"
+
 /* GET / POST / DELETE functions 
  */
 #include "account.h"

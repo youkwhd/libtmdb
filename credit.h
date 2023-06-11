@@ -4,7 +4,8 @@
 #include "curl/handler.h"
 #include "curl/url.h"
 #include "membuffer/membuffer.h"
+#include "request/request.h"
 
-TMDbBuffer *tmdb_get_credit_details(const char *credit_id);
+TMDb_Buffer *tmdb_get_credit_details(TMDb_Query *query);
 
 #endif

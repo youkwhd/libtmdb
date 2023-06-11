@@ -1,121 +1,64 @@
 #include "account.h"
 
-TMDbBuffer *tmdb_get_account_details(const char *session_id)
+TMDb_Buffer *tmdb_get_account_details(TMDb_Query *query)
 {
-    char si_query[512] = "session_id=";
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/account";
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "3/account/%s", tmdb_query_get(query, "account_id"));
+    return tmdb_request_create_get(query, (const char *[]){"account_id"}, 1, path);
 }
 
-TMDbBuffer *tmdb_get_account_lists(const char *account_id, const char *session_id, const char *page)
+TMDb_Buffer *tmdb_get_account_lists(TMDb_Query *query)
 {
-    char si_query[512] = "session_id=";
-    char p_query[512] = "page=";
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/account/";
-    strcat(path, account_id);
-    strcat(path, "/lists");
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "3/account/%s/lists", tmdb_query_get(query, "account_id"));
+    return tmdb_request_create_get(query, (const char *[]){"account_id"}, 1, path);
 }
 
-TMDbBuffer *tmdb_get_account_favorite_movies(const char *account_id, const char *session_id, const char *sort_by, const char *page)
+TMDb_Buffer *tmdb_get_account_favorite_movies(TMDb_Query *query)
 {
-    char si_query[512] = "session_id=";
-    char sb_query[512] = "sort_by=";
-    char p_query[512] = "page=";
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, sb_query, sort_by) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/account/";
-    strcat(path, account_id);
-    strcat(path, "/favorite/movies");
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "3/account/%s/movies", tmdb_query_get(query, "account_id"));
+    return tmdb_request_create_get(query, (const char *[]){"account_id"}, 1, path);
 }
 
-TMDbBuffer *tmdb_get_account_favorite_tv(const char *account_id, const char *session_id, const char *sort_by, const char *page)
+TMDb_Buffer *tmdb_get_account_favorite_tv(TMDb_Query *query)
 {
-    char si_query[512] = "session_id=";
-    char sb_query[512] = "sort_by=";
-    char p_query[512] = "page=";
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, sb_query, sort_by) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/account/";
-    strcat(path, account_id);
-    strcat(path, "/favorite/tv");
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "3/account/%s/favorite/movies", tmdb_query_get(query, "account_id"));
+    return tmdb_request_create_get(query, (const char *[]){"account_id"}, 1, path);
 }
 
-TMDbBuffer *tmdb_post_account_mark_favorite(const char *account_id, const char *session_id, const char *request_body)
+TMDb_Buffer *tmdb_post_account_mark_favorite(TMDb_Query *query, const char *request_body)
 {
+    /* Check for required queries
+     */
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
     char si_query[256] = "session_id=";
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
@@ -145,161 +88,77 @@ TMDbBuffer *tmdb_post_account_mark_favorite(const char *account_id, const char *
     return membuf;
 }
 
-TMDbBuffer *tmdb_get_account_rated_movies(const char *account_id, const char *session_id, const char *sort_by, const char *page)
+TMDb_Buffer *tmdb_get_account_rated_movies(TMDb_Query *query)
 {
-    char si_query[512] = "session_id=";
-    char sb_query[512] = "sort_by=";
-    char p_query[512] = "page=";
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, sb_query, sort_by) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/account/";
-    strcat(path, account_id);
-    strcat(path, "/rated/movies");
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "3/account/%s/rated/movies", tmdb_query_get(query, "account_id"));
+    return tmdb_request_create_get(query, (const char *[]){"account_id"}, 1, path);
 }
 
-TMDbBuffer *tmdb_get_account_rated_tv(const char *account_id, const char *session_id, const char *sort_by, const char *page)
+TMDb_Buffer *tmdb_get_account_rated_tv(TMDb_Query *query)
 {
-    char si_query[512] = "session_id=";
-    char sb_query[512] = "sort_by=";
-    char p_query[512] = "page=";
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, sb_query, sort_by) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/account/";
-    strcat(path, account_id);
-    strcat(path, "/rated/tv");
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "3/account/%s/rated/tv", tmdb_query_get(query, "account_id"));
+    return tmdb_request_create_get(query, (const char *[]){"account_id"}, 1, path);
 }
 
-TMDbBuffer *tmdb_get_account_rated_tv_episodes(const char *account_id, const char *session_id, const char *sort_by, const char *page)
+TMDb_Buffer *tmdb_get_account_rated_tv_episodes(TMDb_Query *query)
 {
-    char si_query[512] = "session_id=";
-    char sb_query[512] = "sort_by=";
-    char p_query[512] = "page=";
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, sb_query, sort_by) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/account/";
-    strcat(path, account_id);
-    strcat(path, "/rated/tv/episodes");
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "3/account/%s/rated/tv/episodes", tmdb_query_get(query, "account_id"));
+    return tmdb_request_create_get(query, (const char *[]){"account_id"}, 1, path);
 }
 
-TMDbBuffer *tmdb_get_account_movie_watchlist(const char *account_id, const char *session_id, const char *sort_by, const char *page)
+TMDb_Buffer *tmdb_get_account_movie_watchlist(TMDb_Query *query)
 {
-    char si_query[512] = "session_id=";
-    char sb_query[512] = "sort_by=";
-    char p_query[512] = "page=";
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, sb_query, sort_by) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/account/";
-    strcat(path, account_id);
-    strcat(path, "/watchlist/movies");
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "3/account/%s/watchlist/movies", tmdb_query_get(query, "account_id"));
+    return tmdb_request_create_get(query, (const char *[]){"account_id"}, 1, path);
 }
 
-TMDbBuffer *tmdb_get_account_tv_watchlist(const char *account_id, const char *session_id, const char *sort_by, const char *page)
+TMDb_Buffer *tmdb_get_account_tv_watchlist(TMDb_Query *query)
 {
-    char si_query[512] = "session_id=";
-    char sb_query[512] = "sort_by=";
-    char p_query[512] = "page=";
+    /* Check for required queries
+     */
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
-
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
-    if (tmdb_url_query_append(url, __global_tmdb_config.lang_query, __global_tmdb_config.lang) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, si_query, session_id) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, sb_query, sort_by) != CURLUE_OK) return NULL;
-    if (tmdb_url_query_append(url, p_query, page) != CURLUE_OK) return NULL;
-
-    char path[256] = "/3/account/";
-    strcat(path, account_id);
-    strcat(path, "/watchlist/tv");
-
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
-
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
-
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "3/account/%s/watchlist/tv", tmdb_query_get(query, "account_id"));
+    return tmdb_request_create_get(query, (const char *[]){"account_id"}, 1, path);
 }
 
-TMDbBuffer *tmdb_post_account_add_watchlist(const char *account_id, const char *session_id, const char *request_body)
+TMDb_Buffer *tmdb_post_account_add_watchlist(TMDb_Query *query, const char *request_body)
 {
+    if (!tmdb_query_has(query, "account_id")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
     char si_query[256] = "session_id=";
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
