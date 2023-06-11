@@ -4,18 +4,14 @@
 #include "curl/handler.h"
 #include "curl/url.h"
 #include "membuffer/membuffer.h"
+#include "request/request.h"
 
-TMDbBuffer *tmdb_get_search_companies(const char *query, const char *page);
-TMDbBuffer *tmdb_get_search_collections(const char *query, const char *page);
-TMDbBuffer *tmdb_get_search_keywords(const char *query, const char *page);
-TMDbBuffer *tmdb_get_search_movies(const char *query,
-                                   const char *page,
-                                   const char *include_adult,
-                                   const char *region,
-                                   const char *year,
-                                   const char *primary_release_year);
-TMDbBuffer *tmdb_get_search_multi(const char *query, const char *page, const char *include_adult, const char *region);
-TMDbBuffer *tmdb_get_search_person(const char *query, const char *page, const char *include_adult, const char *region);
-TMDbBuffer *tmdb_get_search_tv(const char *query, const char *page, const char *include_adult, const char *first_air_date_year);
+TMDb_Buffer *tmdb_get_search_companie(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_search_collection(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_search_keyword(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_search_movie(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_search_multi(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_search_person(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_search_tv(TMDb_Query *query);
 
 #endif

@@ -1,32 +1,49 @@
 #include "trending.h"
 
-/* GET trending */
-
-/* required paths:
- *      - media_type
- *      - time_window
- *
- * https://developers.themoviedb.org/3/trending/get-trending
- */
-TMDbBuffer *tmdb_get_trending(const char *media_type, const char *time_window)
+TMDb_Buffer *tmdb_get_trending_all(TMDb_Query *query)
 {
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
+    if (!tmdb_query_has(query, "time_window")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    CURLU *url = tmdb_url_init();
-    if (url == NULL) return NULL;
+    char path[256];
+    sprintf(path, "/3/trending/all/%s", tmdb_query_get(query, "time_window"));
+    return tmdb_request_create_get(query, (const char *[]){"time_window"}, 1, path);
+}
 
-    char path[256] = "/3/trending/";
-    strcat(path, media_type);
-    strcat(path, "/");
-    strcat(path, time_window);
+TMDb_Buffer *tmdb_get_trending_movie(TMDb_Query *query)
+{
+    if (!tmdb_query_has(query, "time_window")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
-    if (uc != CURLUE_OK) return NULL;
+    char path[256];
+    sprintf(path, "/3/trending/movie/%s", tmdb_query_get(query, "time_window"));
+    return tmdb_request_create_get(query, (const char *[]){"time_window"}, 1, path);
+}
 
-    CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
-    if (res != CURLE_OK) return NULL;
+TMDb_Buffer *tmdb_get_trending_people(TMDb_Query *query)
+{
+    if (!tmdb_query_has(query, "time_window")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
 
-    tmdb_url_cleanup(url);
-    return membuf;
+    char path[256];
+    sprintf(path, "/3/trending/people/%s", tmdb_query_get(query, "time_window"));
+    return tmdb_request_create_get(query, (const char *[]){"time_window"}, 1, path);
+}
+
+TMDb_Buffer *tmdb_get_trending_tv(TMDb_Query *query)
+{
+    if (!tmdb_query_has(query, "time_window")) {
+        tmdb_query_cleanup(query);
+        return NULL;
+    }
+
+    char path[256];
+    sprintf(path, "/3/trending/tv/%s", tmdb_query_get(query, "time_window"));
+    return tmdb_request_create_get(query, (const char *[]){"time_window"}, 1, path);
 }

@@ -4,8 +4,11 @@
 #include "curl/handler.h"
 #include "curl/url.h"
 #include "membuffer/membuffer.h"
+#include "request/request.h"
 
-/* GET trending */
-TMDbBuffer *tmdb_get_trending(const char *media_type, const char *time_window);
+TMDb_Buffer *tmdb_get_trending_all(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_trending_movie(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_trending_people(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_trending_tv(TMDb_Query *query);
 
 #endif

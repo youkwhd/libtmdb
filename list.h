@@ -4,13 +4,14 @@
 #include "curl/handler.h"
 #include "curl/url.h"
 #include "membuffer/membuffer.h"
+#include "request/request.h"
 
-TMDbBuffer *tmdb_get_list_details(const char *list_id);
-TMDbBuffer *tmdb_get_list_item_status(const char *list_id, const char *movie_id);
-TMDbBuffer *tmdb_post_list_create(const char *session_id, const char *request_body);
-TMDbBuffer *tmdb_post_list_add_movie(const char *list_id, const char *session_id, const char *request_body);
-TMDbBuffer *tmdb_post_list_remove_movie(const char *list_id, const char *session_id, const char *request_body);
-TMDbBuffer *tmdb_post_list_clear(const char *list_id, const char *session_id, const char *confirm);
-TMDbBuffer *tmdb_delete_list(const char *list_id, const char *session_id);
+TMDb_Buffer *tmdb_get_list_details(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_list_item_status(TMDb_Query *query);
+TMDb_Buffer *tmdb_post_list_create(TMDb_Query *query);
+TMDb_Buffer *tmdb_post_list_add_movie(TMDb_Query *query);
+TMDb_Buffer *tmdb_post_list_remove_movie(TMDb_Query *query);
+TMDb_Buffer *tmdb_post_list_clear(TMDb_Query *query);
+TMDb_Buffer *tmdb_delete_list(TMDb_Query *query);
 
 #endif

@@ -4,8 +4,9 @@
 #include "curl/handler.h"
 #include "curl/url.h"
 #include "membuffer/membuffer.h"
+#include "request/request.h"
 
-TMDbBuffer *tmdb_get_keyword_details(const char *keyword_id);
-TMDbBuffer *tmdb_get_keyword_movies(const char *keyword_id, const char *include_adult);
+TMDb_Buffer *tmdb_get_keyword_details(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_keyword_movies(TMDb_Query *query);
 
 #endif

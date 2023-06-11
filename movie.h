@@ -27,4 +27,10 @@ TMDb_Buffer *tmdb_post_movie_rate(TMDb_Query *query, const char *request_body);
 TMDb_Buffer *tmdb_delete_movie_rating(TMDb_Query *query);
 TMDb_Buffer *tmdb_get_movie_latest(TMDb_Query *query);
 
+/* Movie Lists */
+TMDb_Buffer *tmdb_get_movie_now_playing(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_movie_popular(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_movie_top_rated(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_movie_upcoming(TMDb_Query *query);
+
 #endif

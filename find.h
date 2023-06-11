@@ -4,7 +4,8 @@
 #include "curl/handler.h"
 #include "curl/url.h"
 #include "membuffer/membuffer.h"
+#include "request/request.h"
 
-TMDbBuffer *tmdb_get_find_by_id(const char *external_id, const char *external_source);
+TMDb_Buffer *tmdb_get_find_by_id(TMDb_Query *query);
 
 #endif

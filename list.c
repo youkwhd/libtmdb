@@ -1,8 +1,8 @@
 #include "list.h"
 
-TMDbBuffer *tmdb_get_list_details(const char *list_id)
+TMDb_Buffer *tmdb_get_list_details(const char *list_id)
 {
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
@@ -22,11 +22,11 @@ TMDbBuffer *tmdb_get_list_details(const char *list_id)
     return membuf;
 }
 
-TMDbBuffer *tmdb_get_list_item_status(const char *list_id, const char *movie_id)
+TMDb_Buffer *tmdb_get_list_item_status(const char *list_id, const char *movie_id)
 {
     char mi_query[128] = "movie_id=";
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     CURLU *url = tmdb_url_init();
@@ -47,11 +47,11 @@ TMDbBuffer *tmdb_get_list_item_status(const char *list_id, const char *movie_id)
     return membuf;
 }
 
-TMDbBuffer *tmdb_post_list_create(const char *session_id, const char *request_body)
+TMDb_Buffer *tmdb_post_list_create(const char *session_id, const char *request_body)
 {
     char si_query[256] = "session_id=";
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
@@ -79,11 +79,11 @@ TMDbBuffer *tmdb_post_list_create(const char *session_id, const char *request_bo
     return membuf;
 }
 
-TMDbBuffer *tmdb_post_list_add_movie(const char *list_id, const char *session_id, const char *request_body)
+TMDb_Buffer *tmdb_post_list_add_movie(const char *list_id, const char *session_id, const char *request_body)
 {
     char si_query[256] = "session_id=";
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
@@ -113,11 +113,11 @@ TMDbBuffer *tmdb_post_list_add_movie(const char *list_id, const char *session_id
     return membuf;
 }
 
-TMDbBuffer *tmdb_post_list_remove_movie(const char *list_id, const char *session_id, const char *request_body)
+TMDb_Buffer *tmdb_post_list_remove_movie(const char *list_id, const char *session_id, const char *request_body)
 {
     char si_query[256] = "session_id=";
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
@@ -147,12 +147,12 @@ TMDbBuffer *tmdb_post_list_remove_movie(const char *list_id, const char *session
     return membuf;
 }
 
-TMDbBuffer *tmdb_post_list_clear(const char *list_id, const char *session_id, const char *confirm)
+TMDb_Buffer *tmdb_post_list_clear(const char *list_id, const char *session_id, const char *confirm)
 {
     char si_query[256] = "session_id=";
     char c_query[256] = "confirm=";
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;
@@ -183,11 +183,11 @@ TMDbBuffer *tmdb_post_list_clear(const char *list_id, const char *session_id, co
     return membuf;
 }
 
-TMDbBuffer *tmdb_delete_list(const char *list_id, const char *session_id)
+TMDb_Buffer *tmdb_delete_list(const char *list_id, const char *session_id)
 {
     char si_query[256] = "session_id=";
 
-    TMDbBuffer *membuf = membuf_init(1024 * sizeof(char));
+    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
 
     struct curl_slist *header = NULL;

@@ -4,9 +4,10 @@
 #include "curl/handler.h"
 #include "curl/url.h"
 #include "membuffer/membuffer.h"
+#include "request/request.h"
 
-TMDbBuffer *tmdb_get_network_details(const char *network_id);
-TMDbBuffer *tmdb_get_network_alternative_names(const char *network_id);
-TMDbBuffer *tmdb_get_network_images(const char *network_id);
+TMDb_Buffer *tmdb_get_network_details(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_network_alternative_names(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_network_images(TMDb_Query *query);
 
 #endif
