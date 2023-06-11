@@ -24,7 +24,7 @@ TMDb_Buffer *tmdb_get_person_changes(TMDb_Query *query)
     return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
 }
 
-TMDb_Buffer *tmdb_get_person_movie_credits(const char *person_id)
+TMDb_Buffer *tmdb_get_person_movie_credits(TMDb_Query *query)
 {
     if (!tmdb_query_has(query, "person_id")) {
         tmdb_query_cleanup(query);
@@ -36,7 +36,7 @@ TMDb_Buffer *tmdb_get_person_movie_credits(const char *person_id)
     return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
 }
 
-TMDb_Buffer *tmdb_get_person_tv_credits(const char *person_id)
+TMDb_Buffer *tmdb_get_person_tv_credits(TMDb_Query *query)
 {
     if (!tmdb_query_has(query, "person_id")) {
         tmdb_query_cleanup(query);
@@ -48,7 +48,7 @@ TMDb_Buffer *tmdb_get_person_tv_credits(const char *person_id)
     return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
 }
 
-TMDb_Buffer *tmdb_get_person_combined_credits(const char *person_id)
+TMDb_Buffer *tmdb_get_person_combined_credits(TMDb_Query *query)
 {
     if (!tmdb_query_has(query, "person_id")) {
         tmdb_query_cleanup(query);
@@ -60,7 +60,7 @@ TMDb_Buffer *tmdb_get_person_combined_credits(const char *person_id)
     return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
 }
 
-TMDb_Buffer *tmdb_get_person_external_ids(const char *person_id)
+TMDb_Buffer *tmdb_get_person_external_ids(TMDb_Query *query)
 {
     if (!tmdb_query_has(query, "person_id")) {
         tmdb_query_cleanup(query);
@@ -72,7 +72,7 @@ TMDb_Buffer *tmdb_get_person_external_ids(const char *person_id)
     return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
 }
 
-TMDb_Buffer *tmdb_get_person_images(const char *person_id)
+TMDb_Buffer *tmdb_get_person_images(TMDb_Query *query)
 {
     if (!tmdb_query_has(query, "person_id")) {
         tmdb_query_cleanup(query);
@@ -84,7 +84,7 @@ TMDb_Buffer *tmdb_get_person_images(const char *person_id)
     return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
 }
 
-TMDb_Buffer *tmdb_get_person_tagged_images(const char *person_id, const char *page)
+TMDb_Buffer *tmdb_get_person_tagged_images(TMDb_Query *query)
 {
     if (!tmdb_query_has(query, "person_id")) {
         tmdb_query_cleanup(query);
@@ -96,7 +96,7 @@ TMDb_Buffer *tmdb_get_person_tagged_images(const char *person_id, const char *pa
     return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
 }
 
-TMDb_Buffer *tmdb_get_person_translations(const char *person_id)
+TMDb_Buffer *tmdb_get_person_translations(TMDb_Query *query)
 {
     if (!tmdb_query_has(query, "person_id")) {
         tmdb_query_cleanup(query);

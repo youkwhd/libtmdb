@@ -4,7 +4,8 @@
 #include "curl/handler.h"
 #include "curl/url.h"
 #include "membuffer/membuffer.h"
+#include "request/request.h"
 
-TMDbBuffer *tmdb_get_tv_episode_group_details(const char *id);
+TMDb_Buffer *tmdb_get_tv_episode_group_details(TMDb_Query *query);
 
 #endif
