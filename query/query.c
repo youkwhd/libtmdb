@@ -19,6 +19,7 @@ TMDb_Query *tmdb_query_init(TMDb_Query_Parameter values, size_t n)
     return query;
 }
 
+/* TODO: Not thread safe yet. */
 char *tmdb_query_get(TMDb_Query *query, const char *key)
 {
     sm_get(query, key, __tmdb_query_buf, TMDB_QUERY_MAX);

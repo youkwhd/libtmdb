@@ -3,6 +3,7 @@
 #include "request.h"
 #include "../curl/url.h"
 
+/* exclusively used for __append_query_cb() */
 typedef struct __cb_obj {
     TMDb_Query *query, *optional_query;
     TMDb_Buffer *buf;
