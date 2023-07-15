@@ -5,9 +5,7 @@
 #include "curl/url.h"
 #include "membuffer/membuffer.h"
 #include "request/request.h"
-
 #include "query/query.h"
-#include "path/path.h"
 
 TMDb_Buffer *tmdb_get_watch_providers_regions();
 TMDb_Buffer *tmdb_get_watch_providers_movie(TMDb_Query *queries, size_t queries_length);
