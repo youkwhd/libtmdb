@@ -16,8 +16,7 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    TMDb_Path movie_path[1] = {{ .name = "movie_id", .value = "666" }};
-    TMDb_Buffer *movie = tmdb_get_movie_details(NULL, 0, movie_path, 1);
+    TMDb_Buffer *movie = tmdb_get_movie_details(NULL, 0, "666");
 
     if (movie == NULL) {
         fprintf(stderr, "failed to get movie details.\n");
