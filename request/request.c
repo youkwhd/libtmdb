@@ -19,13 +19,12 @@ TMDb_Buffer *tmdb_request_create_get(TMDb_Query *queries, const size_t queries_l
 
     for (size_t i = 0; i < queries_len; i++) {
         char query_buf[512];
-        strcpy(query_buf, queries[i].name);
-        strcat(query_buf, "=");
-        strcat(query_buf, queries[i].value);
+        tmdb_query_generate(queries[i], query_buf);
 
         if (tmdb_url_append_query(url, query_buf) != CURLUE_OK) {
             tmdb_url_cleanup(url);
             membuf_cleanup(membuf);
+            return NULL;
         }
     }
 
@@ -63,13 +62,12 @@ TMDb_Buffer *tmdb_request_create_post(TMDb_Query *queries, const size_t queries_
 
     for (size_t i = 0; i < queries_len; i++) {
         char query_buf[512];
-        strcpy(query_buf, queries[i].name);
-        strcat(query_buf, "=");
-        strcat(query_buf, queries[i].value);
+        tmdb_query_generate(queries[i], query_buf);
 
         if (tmdb_url_append_query(url, query_buf) != CURLUE_OK) {
             tmdb_url_cleanup(url);
             membuf_cleanup(membuf);
+            return NULL;
         }
     }
 
@@ -121,13 +119,12 @@ TMDb_Buffer *tmdb_request_create_delete(TMDb_Query *queries, const size_t querie
 
     for (size_t i = 0; i < queries_len; i++) {
         char query_buf[512];
-        strcpy(query_buf, queries[i].name);
-        strcat(query_buf, "=");
-        strcat(query_buf, queries[i].value);
+        tmdb_query_generate(queries[i], query_buf);
 
         if (tmdb_url_append_query(url, query_buf) != CURLUE_OK) {
             tmdb_url_cleanup(url);
             membuf_cleanup(membuf);
+            return NULL;
         }
     }
 

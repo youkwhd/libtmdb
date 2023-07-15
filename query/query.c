@@ -2,6 +2,13 @@
 
 #include "query.h"
 
+void tmdb_query_generate(TMDb_Query query, char *buf)
+{
+    strcat(buf, query.name);
+    strcat(buf, "=");
+    strcat(buf, query.value);
+}
+
 char *tmdb_query_get(TMDb_Query *queries, int n, const char *name)
 {
     for (int i = 0; i < n; i++)
@@ -13,8 +20,5 @@ char *tmdb_query_get(TMDb_Query *queries, int n, const char *name)
 
 bool tmdb_query_has(TMDb_Query *queries, int n, const char *name)
 {
-    if (tmdb_query_get(queries, n, name) == NULL)
-        return false;
-    
-    return true;
+    return tmdb_query_get(queries, n, name) != NULL;
 }
