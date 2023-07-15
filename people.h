@@ -1,11 +1,11 @@
 #ifndef __C_TMDB_PEOPLE_H
 #define __C_TMDB_PEOPLE_H
 
-#include "curl/handler.h"
-#include "curl/url.h"
-#include "membuffer/membuffer.h"
-#include "request/request.h"
-#include "query/query.h"
+#include "tmdb/curl/handler.h"
+#include "tmdb/curl/url.h"
+#include "tmdb/membuffer/membuffer.h"
+#include "tmdb/request/request.h"
+#include "tmdb/query/query.h"
 
 TMDb_Buffer *tmdb_get_person_details(TMDb_Query *queries, size_t queries_length, char *person_id);
 TMDb_Buffer *tmdb_get_person_changes(TMDb_Query *queries, size_t queries_length, char *person_id);

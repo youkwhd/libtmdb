@@ -1,10 +1,10 @@
 #ifndef __C_TMDB_AUTHENTICATION_H
 #define __C_TMDB_AUTHENTICATION_H
 
-#include "curl/handler.h"
-#include "curl/url.h"
-#include "membuffer/membuffer.h"
-#include "request/request.h"
+#include "tmdb/curl/handler.h"
+#include "tmdb/curl/url.h"
+#include "tmdb/membuffer/membuffer.h"
+#include "tmdb/request/request.h"
 
 TMDb_Buffer *tmdb_get_authentication_guest_session_new();
 TMDb_Buffer *tmdb_get_authentication_token_new();

@@ -1,11 +1,11 @@
 #ifndef __C_TMDB_CONFIGURATION_H
 #define __C_TMDB_CONFIGURATION_H
 
-#include "curl/handler.h"
-#include "curl/url.h"
-#include "membuffer/membuffer.h"
-#include "request/request.h"
-#include "query/query.h"
+#include "tmdb/curl/handler.h"
+#include "tmdb/curl/url.h"
+#include "tmdb/membuffer/membuffer.h"
+#include "tmdb/request/request.h"
+#include "tmdb/query/query.h"
 
 TMDb_Buffer *tmdb_get_configuration();
 TMDb_Buffer *tmdb_get_configuration_countries();

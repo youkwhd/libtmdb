@@ -3,11 +3,11 @@
 
 /* curl core
  */
-#include "curl/handler.h"
-#include "curl/url.h"
+#include "tmdb/curl/handler.h"
+#include "tmdb/curl/url.h"
 
-#include "request/request.h"
-#include "query/query.h"
+#include "tmdb/request/request.h"
+#include "tmdb/query/query.h"
 
 /* GET / POST / DELETE functions 
  */

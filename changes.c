@@ -1,5 +1,4 @@
 #include "changes.h"
-#include "request/request.h"
 
 TMDb_Buffer *tmdb_get_changes_movie(TMDb_Query *queries, size_t queries_length)
 {
