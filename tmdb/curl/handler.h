@@ -6,15 +6,15 @@
 
 #include "../membuffer/membuffer.h"
 
-typedef struct TMDbConfig {
+typedef struct TMDb_Config {
     CURL *curl_handler;
     char *api_key;
     char api_key_query[256];
     char *lang;
     char lang_query[64];
-} TMDbConfig;
+} TMDb_Config;
 
-extern TMDbConfig __global_tmdb_config;
+extern TMDb_Config __global_tmdb_config;
 
 bool tmdb_init(const char *api_key);
 bool tmdb_initc(const char *api_key, CURL *curl_handler);

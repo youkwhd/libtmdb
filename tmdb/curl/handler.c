@@ -3,7 +3,7 @@
 #include <string.h>
 
 /* curl handler */
-TMDbConfig __global_tmdb_config = {
+TMDb_Config __global_tmdb_config = {
     .curl_handler = NULL,
     .api_key_query = "api_key=",
     .lang_query = "language=",
