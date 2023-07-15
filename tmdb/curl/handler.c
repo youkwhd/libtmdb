@@ -1,5 +1,4 @@
 #include "handler.h"
-#include "callback.h"
 
 #include <string.h>
 
@@ -27,6 +26,14 @@ bool tmdb_initc(const char *api_key, CURL *curl_handler)
 bool tmdb_init(const char *api_key)
 {
     return tmdb_initc(api_key, curl_easy_init());
+}
+
+size_t curl_writefunction_callback(char *data, size_t size, size_t nmemb, membuffer *membuf)
+{
+    size_t bytes = size * nmemb;
+    membuf_append(membuf, data, bytes);
+
+    return bytes; 
 }
 
 void tmdb_cleanup()
