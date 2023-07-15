@@ -22,11 +22,8 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    TMDb_Buffer *movie = tmdb_get_movie_details(
-            tmdb_query_init((TMDb_Query_Parameter){
-                {"movie_id", "666"}
-            }, 1)
-    );
+    TMDb_Path movie_path[1] = {{ .name = "movie_id", .value = "666" }};
+    TMDb_Buffer *movie = tmdb_get_movie_details(NULL, 0, movie_path, 1);
 
     if (movie == NULL) {
         fprintf(stderr, "failed.\n");
