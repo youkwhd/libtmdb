@@ -3,6 +3,7 @@ libtmdb
 
 libtmdb is a simple C wrapper / library for the The Movie DB
 (TMDb) API, this library depends on libcurl for network calls.
+
 Please be aware that it is also still on early development stage,
 any contribution is welcome.
 
