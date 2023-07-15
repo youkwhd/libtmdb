@@ -13,9 +13,7 @@ You can find simliar wrappers / libraries for other languages at
 1) Documentation
 ----------------
 
-The API of this library is quite well documented in the comments,
-you can refer to the file tmdb.h, or straight into the examples/
-folder.
+Plenty of examples from the examples/ folder.
 
 In case for the TMDb API itself, you can find the documentation
 at <https://developers.themoviedb.org/3>
