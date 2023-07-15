@@ -6,6 +6,9 @@
 #include "membuffer/membuffer.h"
 #include "request/request.h"
 
+#include "query/query.h"
+#include "path/path.h"
+
 TMDb_Buffer *tmdb_get_genre_movie();
 TMDb_Buffer *tmdb_get_genre_tv();
 

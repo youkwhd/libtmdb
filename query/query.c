@@ -1,27 +1,20 @@
-#include <stdio.h>
+#include <string.h>
 
 #include "query.h"
 
-char __tmdb_query_buf[TMDB_QUERY_MAX];
-
-TMDb_Query *tmdb_query_init(TMDb_Query_Parameter values, size_t n)
+char *tmdb_query_get(TMDb_Query *queries, int n, const char *name)
 {
-    TMDb_Query *query = sm_new(TMDB_QUERY_MAX);
-
-    if (query == NULL) {
-        fprintf(stderr, "tmdb_query_init(): failed to allocate memory\n");
-        exit(EXIT_FAILURE);
-    }
-
-    for (size_t i = 0; i < n; i++)
-        tmdb_query_push(query, values[i][0], values[i][1]);
-
-    return query;
+    for (int i = 0; i < n; i++)
+        if (strcmp(queries[i].name, name) == 0)
+            return queries[i].value;
+    
+    return NULL;
 }
 
-/* TODO: Not thread safe yet. */
-char *tmdb_query_get(TMDb_Query *query, const char *key)
+bool tmdb_query_has(TMDb_Query *queries, int n, const char *name)
 {
-    sm_get(query, key, __tmdb_query_buf, TMDB_QUERY_MAX);
-    return __tmdb_query_buf;
+    if (tmdb_query_get(queries, n, name) == NULL)
+        return false;
+    
+    return true;
 }

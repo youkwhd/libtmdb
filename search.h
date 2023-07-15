@@ -6,12 +6,15 @@
 #include "membuffer/membuffer.h"
 #include "request/request.h"
 
-TMDb_Buffer *tmdb_get_search_companie(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_search_collection(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_search_keyword(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_search_movie(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_search_multi(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_search_person(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_search_tv(TMDb_Query *query);
+#include "query/query.h"
+#include "path/path.h"
+
+TMDb_Buffer *tmdb_get_search_companie(TMDb_Query *queries, size_t queries_length);
+TMDb_Buffer *tmdb_get_search_collection(TMDb_Query *queries, size_t queries_length);
+TMDb_Buffer *tmdb_get_search_keyword(TMDb_Query *queries, size_t queries_length);
+TMDb_Buffer *tmdb_get_search_movie(TMDb_Query *queries, size_t queries_length);
+TMDb_Buffer *tmdb_get_search_multi(TMDb_Query *queries, size_t queries_length);
+TMDb_Buffer *tmdb_get_search_person(TMDb_Query *queries, size_t queries_length);
+TMDb_Buffer *tmdb_get_search_tv(TMDb_Query *queries, size_t queries_length);
 
 #endif

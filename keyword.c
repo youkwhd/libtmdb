@@ -1,25 +1,23 @@
 #include "keyword.h"
 
-TMDb_Buffer *tmdb_get_keyword_details(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_keyword_details(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "keyword_id")) {
-        tmdb_query_cleanup(query);
+    char *keyword_id = tmdb_path_get_value(paths, paths_length, "keyword_id");
+    if (keyword_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/keyword/%s", tmdb_query_get(query, "keyword_id"));
-    return tmdb_request_create_get(query, (const char *[]){"keyword_id"}, 1, path);
+    sprintf(path, "/3/keyword/%s", keyword_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
 
-TMDb_Buffer *tmdb_get_keyword_movies(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_keyword_movies(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "keyword_id")) {
-        tmdb_query_cleanup(query);
+    char *keyword_id = tmdb_path_get_value(paths, paths_length, "keyword_id");
+    if (keyword_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/keyword/%s/movies", tmdb_query_get(query, "keyword_id"));
-    return tmdb_request_create_get(query, (const char *[]){"keyword_id"}, 1, path);
+    sprintf(path, "/3/keyword/%s/movies", keyword_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }

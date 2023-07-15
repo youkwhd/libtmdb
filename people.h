@@ -6,16 +6,19 @@
 #include "membuffer/membuffer.h"
 #include "request/request.h"
 
-TMDb_Buffer *tmdb_get_person_details(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_person_changes(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_person_movie_credits(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_person_tv_credits(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_person_combined_credits(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_person_external_ids(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_person_images(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_person_tagged_images(TMDb_Query *query);
-TMDb_Buffer *tmdb_get_person_translations(TMDb_Query *query);
+#include "query/query.h"
+#include "path/path.h"
+
+TMDb_Buffer *tmdb_get_person_details(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length);
+TMDb_Buffer *tmdb_get_person_changes(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length);
+TMDb_Buffer *tmdb_get_person_movie_credits(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length);
+TMDb_Buffer *tmdb_get_person_tv_credits(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length);
+TMDb_Buffer *tmdb_get_person_combined_credits(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length);
+TMDb_Buffer *tmdb_get_person_external_ids(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length);
+TMDb_Buffer *tmdb_get_person_images(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length);
+TMDb_Buffer *tmdb_get_person_tagged_images(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length);
+TMDb_Buffer *tmdb_get_person_translations(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length);
 TMDb_Buffer *tmdb_get_person_latest();
-TMDb_Buffer *tmdb_get_person_popular(TMDb_Query *query);
+TMDb_Buffer *tmdb_get_person_popular(TMDb_Query *queries, size_t queries_length);
 
 #endif

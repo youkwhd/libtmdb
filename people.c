@@ -1,119 +1,110 @@
 #include "people.h"
 
-TMDb_Buffer *tmdb_get_person_details(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_person_details(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "person_id")) {
-        tmdb_query_cleanup(query);
+    char *person_id= tmdb_path_get_value(paths, paths_length, "person_id");
+    if (person_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/person/%s", tmdb_query_get(query, "person_id"));
-    return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
+    sprintf(path, "/3/person/%s", person_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
 
-TMDb_Buffer *tmdb_get_person_changes(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_person_changes(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "person_id")) {
-        tmdb_query_cleanup(query);
+    char *person_id= tmdb_path_get_value(paths, paths_length, "person_id");
+    if (person_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/person/%s/changes", tmdb_query_get(query, "person_id"));
-    return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
+    sprintf(path, "/3/person/%s/changes", person_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
 
-TMDb_Buffer *tmdb_get_person_movie_credits(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_person_movie_credits(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "person_id")) {
-        tmdb_query_cleanup(query);
+    char *person_id= tmdb_path_get_value(paths, paths_length, "person_id");
+    if (person_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/person/%s/movie_credits", tmdb_query_get(query, "person_id"));
-    return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
+    sprintf(path, "/3/person/%s/movie_credits", person_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
 
-TMDb_Buffer *tmdb_get_person_tv_credits(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_person_tv_credits(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "person_id")) {
-        tmdb_query_cleanup(query);
+    char *person_id= tmdb_path_get_value(paths, paths_length, "person_id");
+    if (person_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/person/%s/tv_credits", tmdb_query_get(query, "person_id"));
-    return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
+    sprintf(path, "/3/person/%s/tv_credits", person_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
 
-TMDb_Buffer *tmdb_get_person_combined_credits(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_person_combined_credits(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "person_id")) {
-        tmdb_query_cleanup(query);
+    char *person_id= tmdb_path_get_value(paths, paths_length, "person_id");
+    if (person_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/person/%s/combined_credits", tmdb_query_get(query, "person_id"));
-    return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
+    sprintf(path, "/3/person/%s/combined_credits", person_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
 
-TMDb_Buffer *tmdb_get_person_external_ids(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_person_external_ids(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "person_id")) {
-        tmdb_query_cleanup(query);
+    char *person_id= tmdb_path_get_value(paths, paths_length, "person_id");
+    if (person_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/person/%s/external_ids", tmdb_query_get(query, "person_id"));
-    return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
+    sprintf(path, "/3/person/%s/external_ids", person_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
 
-TMDb_Buffer *tmdb_get_person_images(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_person_images(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "person_id")) {
-        tmdb_query_cleanup(query);
+    char *person_id= tmdb_path_get_value(paths, paths_length, "person_id");
+    if (person_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/person/%s/images", tmdb_query_get(query, "person_id"));
-    return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
+    sprintf(path, "/3/person/%s/images", person_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
 
-TMDb_Buffer *tmdb_get_person_tagged_images(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_person_tagged_images(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "person_id")) {
-        tmdb_query_cleanup(query);
+    char *person_id= tmdb_path_get_value(paths, paths_length, "person_id");
+    if (person_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/person/%s/tagged_images", tmdb_query_get(query, "person_id"));
-    return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
+    sprintf(path, "/3/person/%s/tagged_images", person_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
 
-TMDb_Buffer *tmdb_get_person_translations(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_person_translations(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "person_id")) {
-        tmdb_query_cleanup(query);
+    char *person_id= tmdb_path_get_value(paths, paths_length, "person_id");
+    if (person_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/person/%s/translations", tmdb_query_get(query, "person_id"));
-    return tmdb_request_create_get(query, (const char *[]){"person_id"}, 1, path);
+    sprintf(path, "/3/person/%s/translations", person_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
 
 TMDb_Buffer *tmdb_get_person_latest()
 {
-    return tmdb_request_create_get(tmdb_query_init(NULL, 0), NULL, 0, "/3/person/latest");
+    return tmdb_request_create_get(NULL, 0, "/3/person/latest");
 }
 
-TMDb_Buffer *tmdb_get_person_popular(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_person_popular(TMDb_Query *queries, size_t queries_length)
 {
-    return tmdb_request_create_get(query, NULL, 0, "/3/person/popular");
+    return tmdb_request_create_get(queries, queries_length, "/3/person/popular");
 }

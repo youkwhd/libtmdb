@@ -16,15 +16,9 @@ CURLU *tmdb_url_init()
     return url;
 }
 
-CURLUcode tmdb_url_query_append(CURLU *url, char *query, const char *query_value)
+CURLUcode tmdb_url_append_query(CURLU *url, char *query)
 {
-    CURLUcode ret_code = CURLUE_OK;
-    if (query_value == NULL) 
-        return ret_code;
-
-    strcat(query, query_value);
-    ret_code = curl_url_set(url, CURLUPART_QUERY, query, CURLU_APPENDQUERY);
-    return ret_code;
+    return curl_url_set(url, CURLUPART_QUERY, query, CURLU_APPENDQUERY);
 }
 
 void tmdb_url_cleanup(CURLU *url)

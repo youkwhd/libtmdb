@@ -1,13 +1,12 @@
 #include "find.h"
 
-TMDb_Buffer *tmdb_get_find_by_id(TMDb_Query *query)
+TMDb_Buffer *tmdb_get_find_by_id(TMDb_Query *queries, size_t queries_length, TMDb_Path *paths, size_t paths_length)
 {
-    if (!tmdb_query_has(query, "external_id")) {
-        tmdb_query_cleanup(query);
+    char *external_id = tmdb_path_get_value(paths, paths_length, "external_id");
+    if (external_id == NULL)
         return NULL;
-    }
 
     char path[256];
-    sprintf(path, "/3/find/%s", tmdb_query_get(query, "external_id"));
-    return tmdb_request_create_get(query, (const char *[]){"external_id"}, 1, path);
+    sprintf(path, "/3/find/%s", external_id);
+    return tmdb_request_create_get(queries, queries_length, path);
 }
