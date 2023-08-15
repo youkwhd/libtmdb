@@ -3,7 +3,7 @@
 #include <string.h>
 
 /* curl handler */
-TMDb_Config __global_tmdb_config = {
+tmdb_config_t __global_tmdb_config = {
     .curl_handler = NULL,
     .api_key_query = "api_key=",
     .lang_query = "language=",
@@ -28,10 +28,10 @@ bool tmdb_init(const char *api_key)
     return tmdb_initc(api_key, curl_easy_init());
 }
 
-size_t curl_writefunction_callback(char *data, size_t size, size_t nmemb, membuffer *membuf)
+size_t curl_writefunction_callback(char *data, size_t size, size_t nmemb, tmdb_buffer_t *buffer)
 {
     size_t bytes = size * nmemb;
-    membuf_append(membuf, data, bytes);
+    tmdb_buffer_append(buffer, data, bytes);
 
     return bytes; 
 }

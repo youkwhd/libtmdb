@@ -1,11 +1,11 @@
-#ifndef __REQUEST_TMDB_H
-#define __REQUEST_TMDB_H
+#ifndef TMDB_REQUEST_H
+#define TMDB_REQUEST_H
 
-#include "../membuffer/membuffer.h"
+#include "../buffer/buffer.h"
 #include "../query/query.h"
 
-TMDb_Buffer *tmdb_request_create_get(TMDb_Query *queries, const size_t queries_len, const char *path);
-TMDb_Buffer *tmdb_request_create_post(TMDb_Query *queries, const size_t queries_len, const char *path, const char *request_body);
-TMDb_Buffer *tmdb_request_create_delete(TMDb_Query *queries, const size_t queries_len, const char *path);
+tmdb_buffer_t *tmdb_request_create_get(tmdb_query_t *queries, const size_t queries_len, const char *path);
+tmdb_buffer_t *tmdb_request_create_post(tmdb_query_t *queries, const size_t queries_len, const char *path, const char *request_body);
+tmdb_buffer_t *tmdb_request_create_delete(tmdb_query_t *queries, const size_t queries_len, const char *path);
 
-#endif /* __REQUEST_TMDB_H */
+#endif /* TMDB_REQUEST_H */

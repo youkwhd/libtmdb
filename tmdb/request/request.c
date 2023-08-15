@@ -4,16 +4,16 @@
 #include "../query/query.h"
 #include "../curl/url.h"
 
-TMDb_Buffer *tmdb_request_create_get(TMDb_Query *queries, const size_t queries_len, const char *path)
+tmdb_buffer_t *tmdb_request_create_get(tmdb_query_t *queries, const size_t queries_len, const char *path)
 {
-    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
-    if (membuf == NULL) {
+    tmdb_buffer_t *buffer = tmdb_buffer_init(1024 * sizeof(char));
+    if (buffer == NULL) {
         return NULL;
     }
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) {
-        membuf_cleanup(membuf);
+        tmdb_buffer_cleanup(buffer);
         return NULL;
     }
 
@@ -23,40 +23,40 @@ TMDb_Buffer *tmdb_request_create_get(TMDb_Query *queries, const size_t queries_l
 
         if (tmdb_url_append_query(url, query_buf) != CURLUE_OK) {
             tmdb_url_cleanup(url);
-            membuf_cleanup(membuf);
+            tmdb_buffer_cleanup(buffer);
             return NULL;
         }
     }
 
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, buffer);
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) {
         tmdb_url_cleanup(url);
-        membuf_cleanup(membuf);
+        tmdb_buffer_cleanup(buffer);
         return NULL;
     }
 
     CURLcode res = curl_easy_perform(__global_tmdb_config.curl_handler);
     if (res != CURLE_OK) {
         tmdb_url_cleanup(url);
-        membuf_cleanup(membuf);
+        tmdb_buffer_cleanup(buffer);
         return NULL;
     }
 
     tmdb_url_cleanup(url);
-    return membuf;
+    return buffer;
 }
 
-TMDb_Buffer *tmdb_request_create_post(TMDb_Query *queries, const size_t queries_len, const char *path, const char *request_body)
+tmdb_buffer_t *tmdb_request_create_post(tmdb_query_t *queries, const size_t queries_len, const char *path, const char *request_body)
 {
-    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
-    if (membuf == NULL) {
+    tmdb_buffer_t *buffer = tmdb_buffer_init(1024 * sizeof(char));
+    if (buffer == NULL) {
         return NULL;
     }
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) {
-        membuf_cleanup(membuf);
+        tmdb_buffer_cleanup(buffer);
         return NULL;
     }
 
@@ -66,16 +66,16 @@ TMDb_Buffer *tmdb_request_create_post(TMDb_Query *queries, const size_t queries_
 
         if (tmdb_url_append_query(url, query_buf) != CURLUE_OK) {
             tmdb_url_cleanup(url);
-            membuf_cleanup(membuf);
+            tmdb_buffer_cleanup(buffer);
             return NULL;
         }
     }
 
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, buffer);
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) {
         tmdb_url_cleanup(url);
-        membuf_cleanup(membuf);
+        tmdb_buffer_cleanup(buffer);
         return NULL;
     }
 
@@ -92,7 +92,7 @@ TMDb_Buffer *tmdb_request_create_post(TMDb_Query *queries, const size_t queries_
         curl_slist_free_all(header);
 
         tmdb_url_cleanup(url);
-        membuf_cleanup(membuf);
+        tmdb_buffer_cleanup(buffer);
         return NULL;
     }
 
@@ -101,19 +101,19 @@ TMDb_Buffer *tmdb_request_create_post(TMDb_Query *queries, const size_t queries_
     curl_slist_free_all(header);
 
     tmdb_url_cleanup(url);
-    return membuf;
+    return buffer;
 }
 
-TMDb_Buffer *tmdb_request_create_delete(TMDb_Query *queries, const size_t queries_len, const char *path)
+tmdb_buffer_t *tmdb_request_create_delete(tmdb_query_t *queries, const size_t queries_len, const char *path)
 {
-    TMDb_Buffer *membuf = membuf_init(1024 * sizeof(char));
-    if (membuf == NULL) {
+    tmdb_buffer_t *buffer = tmdb_buffer_init(1024 * sizeof(char));
+    if (buffer == NULL) {
         return NULL;
     }
 
     CURLU *url = tmdb_url_init();
     if (url == NULL) {
-        membuf_cleanup(membuf);
+        tmdb_buffer_cleanup(buffer);
         return NULL;
     }
 
@@ -123,16 +123,16 @@ TMDb_Buffer *tmdb_request_create_delete(TMDb_Query *queries, const size_t querie
 
         if (tmdb_url_append_query(url, query_buf) != CURLUE_OK) {
             tmdb_url_cleanup(url);
-            membuf_cleanup(membuf);
+            tmdb_buffer_cleanup(buffer);
             return NULL;
         }
     }
 
-    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, membuf);
+    curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_WRITEDATA, buffer);
     CURLUcode uc = curl_url_set(url, CURLUPART_PATH, path, 0);
     if (uc != CURLUE_OK) {
         tmdb_url_cleanup(url);
-        membuf_cleanup(membuf);
+        tmdb_buffer_cleanup(buffer);
         return NULL;
     }
 
@@ -147,7 +147,7 @@ TMDb_Buffer *tmdb_request_create_delete(TMDb_Query *queries, const size_t querie
         curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_CUSTOMREQUEST, NULL);
         curl_slist_free_all(header);
         tmdb_url_cleanup(url);
-        membuf_cleanup(membuf);
+        tmdb_buffer_cleanup(buffer);
         return NULL;
     }
 
@@ -155,5 +155,5 @@ TMDb_Buffer *tmdb_request_create_delete(TMDb_Query *queries, const size_t querie
     curl_easy_setopt(__global_tmdb_config.curl_handler, CURLOPT_CUSTOMREQUEST, NULL);
     curl_slist_free_all(header);
     tmdb_url_cleanup(url);
-    return membuf;
+    return buffer;
 }

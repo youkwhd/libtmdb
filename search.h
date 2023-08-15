@@ -3,16 +3,16 @@
 
 #include "tmdb/curl/handler.h"
 #include "tmdb/curl/url.h"
-#include "tmdb/membuffer/membuffer.h"
+#include "tmdb/buffer/buffer.h"
 #include "tmdb/request/request.h"
 #include "tmdb/query/query.h"
 
-TMDb_Buffer *tmdb_get_search_companie(TMDb_Query *queries, size_t queries_length);
-TMDb_Buffer *tmdb_get_search_collection(TMDb_Query *queries, size_t queries_length);
-TMDb_Buffer *tmdb_get_search_keyword(TMDb_Query *queries, size_t queries_length);
-TMDb_Buffer *tmdb_get_search_movie(TMDb_Query *queries, size_t queries_length);
-TMDb_Buffer *tmdb_get_search_multi(TMDb_Query *queries, size_t queries_length);
-TMDb_Buffer *tmdb_get_search_person(TMDb_Query *queries, size_t queries_length);
-TMDb_Buffer *tmdb_get_search_tv(TMDb_Query *queries, size_t queries_length);
+tmdb_buffer_t *tmdb_get_search_companie(tmdb_query_t *queries, size_t queries_length);
+tmdb_buffer_t *tmdb_get_search_collection(tmdb_query_t *queries, size_t queries_length);
+tmdb_buffer_t *tmdb_get_search_keyword(tmdb_query_t *queries, size_t queries_length);
+tmdb_buffer_t *tmdb_get_search_movie(tmdb_query_t *queries, size_t queries_length);
+tmdb_buffer_t *tmdb_get_search_multi(tmdb_query_t *queries, size_t queries_length);
+tmdb_buffer_t *tmdb_get_search_person(tmdb_query_t *queries, size_t queries_length);
+tmdb_buffer_t *tmdb_get_search_tv(tmdb_query_t *queries, size_t queries_length);
 
 #endif

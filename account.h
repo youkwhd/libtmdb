@@ -3,21 +3,21 @@
 
 #include "tmdb/curl/handler.h"
 #include "tmdb/curl/url.h"
-#include "tmdb/membuffer/membuffer.h"
+#include "tmdb/buffer/buffer.h"
 #include "tmdb/request/request.h"
 #include "tmdb/query/query.h"
 
-TMDb_Buffer *tmdb_get_account_details(TMDb_Query *queries, size_t queries_length, char *account_id);
-TMDb_Buffer *tmdb_get_account_lists(TMDb_Query *queries, size_t queries_length, char *account_id);
-TMDb_Buffer *tmdb_get_account_favorite_movies(TMDb_Query *queries, size_t queries_length, char *account_id);
-TMDb_Buffer *tmdb_get_account_favorite_tv(TMDb_Query *queries, size_t queries_length, char *account_id);
-TMDb_Buffer *tmdb_get_account_rated_movies(TMDb_Query *queries, size_t queries_length, char *account_id);
-TMDb_Buffer *tmdb_get_account_rated_tv(TMDb_Query *queries, size_t queries_length, char *account_id);
-TMDb_Buffer *tmdb_get_account_rated_tv_episodes(TMDb_Query *queries, size_t queries_length, char *account_id);
-TMDb_Buffer *tmdb_get_account_movie_watchlist(TMDb_Query *queries, size_t queries_length, char *account_id);
-TMDb_Buffer *tmdb_get_account_tv_watchlist(TMDb_Query *queries, size_t queries_length, char *account_id);
+tmdb_buffer_t *tmdb_get_account_details(tmdb_query_t *queries, size_t queries_length, char *account_id);
+tmdb_buffer_t *tmdb_get_account_lists(tmdb_query_t *queries, size_t queries_length, char *account_id);
+tmdb_buffer_t *tmdb_get_account_favorite_movies(tmdb_query_t *queries, size_t queries_length, char *account_id);
+tmdb_buffer_t *tmdb_get_account_favorite_tv(tmdb_query_t *queries, size_t queries_length, char *account_id);
+tmdb_buffer_t *tmdb_get_account_rated_movies(tmdb_query_t *queries, size_t queries_length, char *account_id);
+tmdb_buffer_t *tmdb_get_account_rated_tv(tmdb_query_t *queries, size_t queries_length, char *account_id);
+tmdb_buffer_t *tmdb_get_account_rated_tv_episodes(tmdb_query_t *queries, size_t queries_length, char *account_id);
+tmdb_buffer_t *tmdb_get_account_movie_watchlist(tmdb_query_t *queries, size_t queries_length, char *account_id);
+tmdb_buffer_t *tmdb_get_account_tv_watchlist(tmdb_query_t *queries, size_t queries_length, char *account_id);
 
-TMDb_Buffer *tmdb_post_account_mark_favorite(TMDb_Query *queries, size_t queries_length, char *account_id, char *request_body);
-TMDb_Buffer *tmdb_post_account_add_watchlist(TMDb_Query *queries, size_t queries_length, char *account_id, char *request_body);
+tmdb_buffer_t *tmdb_post_account_mark_favorite(tmdb_query_t *queries, size_t queries_length, char *account_id, char *request_body);
+tmdb_buffer_t *tmdb_post_account_add_watchlist(tmdb_query_t *queries, size_t queries_length, char *account_id, char *request_body);
 
 #endif

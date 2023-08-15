@@ -3,14 +3,14 @@
 
 #include "tmdb/curl/handler.h"
 #include "tmdb/curl/url.h"
-#include "tmdb/membuffer/membuffer.h"
+#include "tmdb/buffer/buffer.h"
 #include "tmdb/request/request.h"
 #include "tmdb/query/query.h"
 
-TMDb_Buffer *tmdb_get_configuration();
-TMDb_Buffer *tmdb_get_configuration_countries();
-TMDb_Buffer *tmdb_get_configuration_languages();
-TMDb_Buffer *tmdb_get_configuration_primary_translations();
-TMDb_Buffer *tmdb_get_configuration_timezones();
+tmdb_buffer_t *tmdb_get_configuration();
+tmdb_buffer_t *tmdb_get_configuration_countries();
+tmdb_buffer_t *tmdb_get_configuration_languages();
+tmdb_buffer_t *tmdb_get_configuration_primary_translations();
+tmdb_buffer_t *tmdb_get_configuration_timezones();
 
 #endif

@@ -4,21 +4,21 @@
 #include <curl/curl.h>
 #include <stdbool.h>
 
-#include "../membuffer/membuffer.h"
+#include "../buffer/buffer.h"
 
-typedef struct TMDb_Config {
+typedef struct tmdb_config_t {
     CURL *curl_handler;
     char *api_key;
     char api_key_query[256];
     char *lang;
     char lang_query[64];
-} TMDb_Config;
+} tmdb_config_t;
 
-extern TMDb_Config __global_tmdb_config;
+extern tmdb_config_t __global_tmdb_config;
 
 bool tmdb_init(const char *api_key);
 bool tmdb_initc(const char *api_key, CURL *curl_handler);
-size_t curl_writefunction_callback(char *data, size_t size, size_t nmemb, membuffer *membuf);
+size_t curl_writefunction_callback(char *data, size_t size, size_t nmemb, tmdb_buffer_t *buffer);
 void tmdb_cleanup();
 
 #endif /* __CURL_HANDLER_H */

@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -std=c99 -pedantic-errors -Wall -Wextra
 
-SRC = $(wildcard *.c tmdb/curl/*.c tmdb/membuffer/*.c tmdb/query/*.c tmdb/request/*c)
-DEPS = $(wildcard *.h tmdb/curl/*.c tmdb/membuffer/*.c tmdb/query/*.c tmdb/request/*c)
+SRC = $(wildcard *.c tmdb/curl/*.c tmdb/buffer/*.c tmdb/query/*.c tmdb/request/*c)
+DEPS = $(wildcard *.h tmdb/curl/*.c tmdb/buffer/*.c tmdb/query/*.c tmdb/request/*c)
 OBJ = $(patsubst %.c,%.o, $(SRC))
 
 all: libtmdb
@@ -23,8 +23,8 @@ install: libtmdb
 	mkdir -p /usr/include/tmdb/tmdb/curl
 	cp tmdb/curl/*.h /usr/include/tmdb/tmdb/curl
 
-	mkdir -p /usr/include/tmdb/tmdb/membuffer
-	cp tmdb/membuffer/*.h /usr/include/tmdb/tmdb/membuffer
+	mkdir -p /usr/include/tmdb/tmdb/buffer
+	cp tmdb/buffer/*.h /usr/include/tmdb/tmdb/buffer
 
 	mkdir -p /usr/include/tmdb/tmdb/query
 	cp tmdb/query/*.h /usr/include/tmdb/tmdb/query

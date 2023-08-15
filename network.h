@@ -3,12 +3,12 @@
 
 #include "tmdb/curl/handler.h"
 #include "tmdb/curl/url.h"
-#include "tmdb/membuffer/membuffer.h"
+#include "tmdb/buffer/buffer.h"
 #include "tmdb/request/request.h"
 #include "tmdb/query/query.h"
 
-TMDb_Buffer *tmdb_get_network_details(TMDb_Query *queries, size_t queries_length, char *network_id);
-TMDb_Buffer *tmdb_get_network_alternative_names(TMDb_Query *queries, size_t queries_length, char *network_id);
-TMDb_Buffer *tmdb_get_network_images(TMDb_Query *queries, size_t queries_length, char *network_id);
+tmdb_buffer_t *tmdb_get_network_details(tmdb_query_t *queries, size_t queries_length, char *network_id);
+tmdb_buffer_t *tmdb_get_network_alternative_names(tmdb_query_t *queries, size_t queries_length, char *network_id);
+tmdb_buffer_t *tmdb_get_network_images(tmdb_query_t *queries, size_t queries_length, char *network_id);
 
 #endif
