@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define tmdb_buffer_cleanup(buffer) tmdb_buffer_cleanup(buffer)
-
 typedef struct tmdb_buffer_t {
     char *data;
     size_t size;
