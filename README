@@ -22,7 +22,7 @@ at <https://developers.themoviedb.org/3>
 ---------------
 
 Every function that does network calls, such as tmdb_get*,
-tmdb_post*, and tmdb_delete* returns TMDbBuffer (membuffer).
+tmdb_post*, and tmdb_delete* returns tmdb_buffer_t.
 
 In order to use the response, access the struct member named
 data. In order to parse JSON itself, you have to utilize JSON
