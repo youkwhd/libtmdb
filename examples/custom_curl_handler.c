@@ -22,7 +22,7 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    TMDb_Buffer *movie = tmdb_get_movie_details(NULL, 0, "666");
+    tmdb_buffer_t *movie = tmdb_get_movie_details(NULL, 0, "666");
 
     if (movie == NULL) {
         fprintf(stderr, "failed.\n");
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
     /* ..., your code with net calls
      */
 
-    tmdb_buf_cleanup(movie);
+    tmdb_buffer_cleanup(movie);
     curl_easy_cleanup(curl_handler);
     return EXIT_SUCCESS;
 }

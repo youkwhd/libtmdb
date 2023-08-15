@@ -15,7 +15,7 @@ int main(void)
         return EXIT_FAILURE;
     }
 
-    TMDb_Buffer *movie = tmdb_get_movie_details(NULL, 0, "666");
+    tmdb_buffer_t *movie = tmdb_get_movie_details(NULL, 0, "666");
 
     if (movie == NULL) {
         fprintf(stderr, "failed to get movie details.\n");
@@ -25,7 +25,7 @@ int main(void)
     
     printf("%s", movie->data);
 
-    tmdb_buf_cleanup(movie);
+    tmdb_buffer_cleanup(movie);
     tmdb_cleanup();
     return 0;
 }

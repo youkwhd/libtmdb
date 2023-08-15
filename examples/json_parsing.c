@@ -16,7 +16,7 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    TMDb_Buffer *movie = tmdb_get_movie_details(NULL, 0, "666");
+    tmdb_buffer_t *movie = tmdb_get_movie_details(NULL, 0, "666");
 
     if (movie == NULL) {
         fprintf(stderr, "failed to get movie details.\n");
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     json_object_object_get_ex(jobj, "overview", &overview);
     printf("overview: %s\n", json_object_get_string(overview));
 
-    tmdb_buf_cleanup(movie);
+    tmdb_buffer_cleanup(movie);
     tmdb_cleanup();
     return EXIT_SUCCESS;
 }
