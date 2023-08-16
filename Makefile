@@ -1,49 +1,45 @@
-CC = gcc
-CFLAGS = -std=c99 -pedantic-errors -Wall -Wextra
+LIB           = libtmdb
 
-SRC = $(wildcard *.c tmdb/curl/*.c tmdb/buffer/*.c tmdb/query/*.c tmdb/request/*c)
-DEPS = $(wildcard *.h tmdb/curl/*.c tmdb/buffer/*.c tmdb/query/*.c tmdb/request/*c)
-OBJ = $(patsubst %.c,%.o, $(SRC))
+CC            = gcc
+CFLAGS        = -std=c99 -pedantic-errors -Wall -Wextra
 
-all: libtmdb
+LINKER        = ld
+LDLIBS        = -lcurl
+LDFLAGS       =
 
-debug:
-	@echo $(SRC)
-	@echo $(OBJ)
-	@echo $(DEPS)
+INST_LIB      = /usr/lib
+INST_INCLUDE  = /usr/include
 
-libtmdb: $(OBJ)
-	$(CC) $(CFLAGS) -lcurl -shared $^ -o libtmdb.so
+SRC_DIRS      = $(wildcard tmdb/*)
+SRC          := $(wildcard *.c)
+SRC          += $(foreach DIR,$(SRC_DIRS),$(wildcard $(DIR)/*.c))
 
-# TODO: automate nest folder
-install: libtmdb
-	mkdir -p /usr/include/tmdb
-	cp *.h  /usr/include/tmdb
+DEPS         := $(SRC:.c=.h)
+OBJ          := $(SRC:.c=.o)
 
-	mkdir -p /usr/include/tmdb/tmdb/curl
-	cp tmdb/curl/*.h /usr/include/tmdb/tmdb/curl
+all: $(LIB)
 
-	mkdir -p /usr/include/tmdb/tmdb/buffer
-	cp tmdb/buffer/*.h /usr/include/tmdb/tmdb/buffer
+$(LIB): $(OBJ)
+	$(LINKER) $(LDLIBS) -shared $^ -o $(LIB).so
 
-	mkdir -p /usr/include/tmdb/tmdb/query
-	cp tmdb/query/*.h /usr/include/tmdb/tmdb/query
+install: $(LIB)
+	for dir in "" $(SRC_DIRS); do \
+		mkdir -p $(INST_INCLUDE)/tmdb/$$dir ; \
+		cp ./$$dir/*.h $(INST_INCLUDE)/tmdb/$$dir ; \
+	done
 
-	mkdir -p /usr/include/tmdb/tmdb/request
-	cp tmdb/request/*.h /usr/include/tmdb/tmdb/request
-
-	cp libtmdb.so /usr/lib
-	cp libtmdb.so /lib
+	cp $(LIB).so $(INST_LIB) 
 
 uninstall:
-	$(RM) -r /usr/include/tmdb
-	$(RM) /usr/lib/libtmdb.so
-	$(RM) /lib/libtmdb.so
+	$(RM) $(INST_LIB)/$(LIB).so
+	$(RM) -r $(INST_INCLUDE)/tmdb
 
+# Assuming every file
+# depens on header DEPS
 %.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
 clean:
-	$(RM) $(OBJ) libtmdb.so
+	$(RM) $(OBJ) $(LIB).so
 
-.PHONY: clean all libtmdb install uninstall
+.PHONY: clean all $(LIB) install uninstall
