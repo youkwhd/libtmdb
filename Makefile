@@ -3,7 +3,7 @@ LIB           = libtmdb
 CC            = gcc
 CFLAGS        = -std=c99 -pedantic-errors -Wall -Wextra
 
-LINKER        = ld
+LD            = ld
 LDLIBS        = -lcurl
 LDFLAGS       =
 
@@ -20,7 +20,7 @@ OBJ          := $(SRC:.c=.o)
 all: $(LIB)
 
 $(LIB): $(OBJ)
-	$(LINKER) $(LDLIBS) -shared $^ -o $(LIB).so
+	$(LD) $(LDLIBS) -shared $^ -o $(LIB).so
 
 install: $(LIB)
 	for dir in "" $(SRC_DIRS); do \
