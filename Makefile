@@ -10,7 +10,7 @@ LDFLAGS       =
 INST_LIB      = /usr/lib
 INST_INCLUDE  = /usr/include
 
-SRC_DIRS      = $(wildcard tmdb/*)
+SRC_DIRS     := $(wildcard tmdb/*)
 SRC          := $(wildcard *.c)
 SRC          += $(foreach DIR,$(SRC_DIRS),$(wildcard $(DIR)/*.c))
 
