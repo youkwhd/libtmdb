@@ -36,14 +36,17 @@ void tmdb_buffer_grow(tmdb_buffer_t *buffer, size_t new_size)
     }
 }
 
-void tmdb_buffer_append(tmdb_buffer_t *buffer, const char *str, size_t str_size)
+void tmdb_buffer_append(tmdb_buffer_t *buffer, const char *str, size_t str_len)
 {
-    while ((buffer->length + 1)  + str_size > buffer->size)
-        tmdb_buffer_grow(buffer, buffer->length + (str_size * 2));
+    while ((buffer->length + 1)  + str_len > buffer->size)
+        tmdb_buffer_grow(buffer, buffer->length + (str_len * 2));
 
-    memcpy(buffer->data + buffer->length, str, str_size);
-    buffer->length += str_size + 1;
-    buffer->data[buffer->length + 1] = '\0';
+    memcpy(buffer->data + buffer->length, str, str_len);
+    buffer->length += str_len;
+
+    if (buffer->data[buffer->length] != '\0') {
+        buffer->data[++buffer->length] = '\0';
+    }
 }
 
 void tmdb_buffer_cleanup(tmdb_buffer_t *buffer)
